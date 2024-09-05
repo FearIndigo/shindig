@@ -1,0 +1,17 @@
+{
+  "name": "shindig-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@auth/express": "^0.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "rxdb": "^15.32.0",
+    "rxdb-server": "^15.32.0",
+    "rxjs": "^7.8.1"
+  }
+}
