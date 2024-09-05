@@ -1,6 +1,6 @@
 {
-  "name": "cdk",
-  "version": "0.1.0",
+  "name": "shindig-cdk",
+  "private": true,
   "bin": {
     "cdk": "bin/cdk.js"
   },
