@@ -1,4 +1,4 @@
-const { Stack, Duration } = require('aws-cdk-lib');
+const { Stack, Duration } = require("aws-cdk-lib");
 // const sqs = require('aws-cdk-lib/aws-sqs');
 
 class CdkStack extends Stack {
@@ -20,4 +20,4 @@ class CdkStack extends Stack {
   }
 }
 
-module.exports = { CdkStack }
+module.exports = { CdkStack };
