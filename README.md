@@ -54,4 +54,7 @@ cdk bootstrap
 
 # Deploy this stack to your default AWS account/region.
 cdk deploy
+
+# When you are finished make sure to destroy your deployed cdk resources
+cdk destroy
 ```
