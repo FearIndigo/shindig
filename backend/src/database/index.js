@@ -10,7 +10,7 @@ export default async function initRxDB() {
   const db = await createRxDB();
 
   // Create collections.
-  addCollections(db);
+  await addCollections(db);
 
   return db;
 }

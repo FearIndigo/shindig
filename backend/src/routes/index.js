@@ -1,6 +1,6 @@
 import useAuth from "./auth.route.js";
 
-export default function addRoutes(rxServer) {
+export default async function addRoutes(rxServer) {
   // Add Auth.js routes.
   useAuth(rxServer.serverApp);
 

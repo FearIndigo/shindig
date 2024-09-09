@@ -11,14 +11,13 @@ const db = await initRxDB();
 const rxServer = await createRxServer({
   database: db,
   adapter: RxServerAdapterExpress,
-  port: process.env.PORT,
+  port: 443,
   authHandler,
+  hostname: "0.0.0.0",
 });
 
 // Add routes.
-addRoutes(rxServer);
+await addRoutes(rxServer);
 
 // Start the server.
 await rxServer.start();
-
-console.log(`App is running on http://localhost:${process.env.PORT}`);
