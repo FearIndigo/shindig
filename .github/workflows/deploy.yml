@@ -20,7 +20,7 @@ jobs:
           node-version: "22.8.x"
       - run: cd ./frontend
       - name: Install dependencies
-        run: npm Install
+        run: npm install
       - name: Build
         run: npm run generate
       - name: Upload frontend artifacts
