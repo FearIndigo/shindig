@@ -26,6 +26,7 @@ services:
       - 27018:27017
     volumes:
       - mongo-volume:/data/db
+      - mongo-volume:/data/configdb
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
