@@ -14,17 +14,8 @@ Technology used:
 # Navigate to backend folder.
 cd ./backend
 
-# Install dependencies.
-npm install
-
-# Copy local dev environment file.
-cp .env.example .env
-
-# Generate auth.js secret string.
-npx auth secret
-
-# (optional) Start backend development server locally.
-npm run dev
+# Build and run docker containers.
+docker compose up
 ```
 
 ## Frontend
