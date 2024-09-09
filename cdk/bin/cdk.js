@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const cdk = require("aws-cdk-lib");
+const { App } = require("aws-cdk-lib");
 const { CertificateStack } = require("../lib/certificate-stack");
 const { CdkStack } = require("../lib/cdk-stack");
 
-const app = new cdk.App();
+const app = new App();
 
 // Custom domain name.
 const domainName = "shindig.fearindigo.com.au";
@@ -12,6 +12,7 @@ const domainName = "shindig.fearindigo.com.au";
 // SSL certificates for cloudfront must be in us-east-1 region, but the website is possibly hosted in a different region.
 const crossRegionReferences = process.env.CDK_DEFAULT_REGION !== "us-east-1";
 
+// Create certificate stack
 const certificateStack = new CertificateStack(
   app,
   "CertificateStack",
@@ -31,6 +32,7 @@ const certificateStack = new CertificateStack(
   }
 );
 
+// Create cdk stack
 const cdkStack = new CdkStack(
   app,
   "CdkStack",

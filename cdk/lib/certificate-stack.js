@@ -1,4 +1,8 @@
-const { Stack, aws_certificatemanager } = require("aws-cdk-lib");
+const { Stack } = require("aws-cdk-lib");
+const {
+  Certificate,
+  CertificateValidation,
+} = require("aws-cdk-lib/aws-certificatemanager");
 
 class CertificateStack extends Stack {
   /**
@@ -11,14 +15,10 @@ class CertificateStack extends Stack {
     super(scope, id, props);
 
     // Create ssl certificate. (NOTE: DNS records must be manually added.)
-    this.certificate = new aws_certificatemanager.Certificate(
-      this,
-      "Shindig_Certificate",
-      {
-        domainName: customProps.domainName,
-        validation: aws_certificatemanager.CertificateValidation.fromDns(),
-      }
-    );
+    this.certificate = new Certificate(this, "Shindig_Certificate", {
+      domainName: customProps.domainName,
+      validation: CertificateValidation.fromDns(),
+    });
   }
 }
 
