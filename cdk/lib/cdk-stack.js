@@ -30,6 +30,9 @@ class CdkStack extends Stack {
     // Retrieve ssl certificate from custom props.
     const certificate = customProps.certificate;
 
+    // Get domain name from environment variables.
+    const domainName = process.env.DOMAIN_NAME;
+
     // Create private s3 bucket to store static frontend files (website and images).
     const bucket = new Bucket(this, "Shindig_Bucket", {
       enforceSSL: true,
@@ -56,8 +59,7 @@ class CdkStack extends Stack {
         origin: new S3Origin(bucket, { originAccessIdentity }),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
-      additionalBehaviors: [new EC2Ori()],
-      domainNames: [customProps.domainName],
+      domainNames: [domainName],
     });
 
     // Deploy frontent to s3 bucket. (NOTE: frontend files need to be generated first.)

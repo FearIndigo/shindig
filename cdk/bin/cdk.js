@@ -6,31 +6,20 @@ const { CdkStack } = require("../lib/cdk-stack");
 
 const app = new App();
 
-// Custom domain name.
-const domainName = "shindig.fearindigo.com.au";
-
 // SSL certificates for cloudfront must be in us-east-1 region, but the website is possibly hosted in a different region.
 const crossRegionReferences = process.env.CDK_DEFAULT_REGION !== "us-east-1";
 
 // Create certificate stack
-const certificateStack = new CertificateStack(
-  app,
-  "CertificateStack",
-  {
-    // Specialize this stack for the AWS Account implied by the current CLI configuration, but enforce the us-east-1 region.
-    env: {
-      account: process.env.CDK_DEFAULT_ACCOUNT,
-      region: "us-east-1",
-    },
-
-    // SSL certificates for cloudfront must be in us-east-1 region, but the website is possibly hosted in a different region.
-    crossRegionReferences,
+const certificateStack = new CertificateStack(app, "CertificateStack", {
+  // Specialize this stack for the AWS Account implied by the current CLI configuration, but enforce the us-east-1 region.
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: "us-east-1",
   },
-  {
-    // Domain name for ssl certificate.
-    domainName,
-  }
-);
+
+  // SSL certificates for cloudfront must be in us-east-1 region, but the website is possibly hosted in a different region.
+  crossRegionReferences,
+});
 
 // Create cdk stack
 const cdkStack = new CdkStack(
@@ -47,9 +36,6 @@ const cdkStack = new CdkStack(
     crossRegionReferences,
   },
   {
-    // Domain name for cloudfront distribution (NOTE: must match domain name for ssl certificate.)
-    domainName,
-
     // Provide the ssl certificate.
     certificate: certificateStack.certificate,
   }

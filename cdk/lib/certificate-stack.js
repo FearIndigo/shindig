@@ -11,12 +11,15 @@ class CertificateStack extends Stack {
    * @param {string} id
    * @param {StackProps=} props
    */
-  constructor(scope, id, props, customProps) {
+  constructor(scope, id, props) {
     super(scope, id, props);
+
+    // Get domain name from environment variables.
+    const domainName = process.env.DOMAIN_NAME;
 
     // Create ssl certificate. (NOTE: DNS records must be manually added.)
     this.certificate = new Certificate(this, "Shindig_Certificate", {
-      domainName: customProps.domainName,
+      domainName,
       validation: CertificateValidation.fromDns(),
     });
   }

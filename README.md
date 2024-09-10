@@ -14,7 +14,7 @@ Technology used:
 # Navigate to backend folder.
 cd ./backend
 
-# Copy env files. (NOTE: values need to be manually entered where applicable.)
+# Copy env files. (NOTE: values need to be manually entered in .env where applicable.)
 cp .env.example .env
 cp .env.db.example .env.db
 
@@ -41,7 +41,7 @@ npm run dev
 npm run generate
 ```
 
-## AWS CDK - Deploy to AWS
+## Deploy
 
 Before you can deploy this app to AWS, you will need the following:
 
@@ -60,6 +60,9 @@ cd ./cdk
 # Install dependencies.
 npm install
 
+# Copy env files (NOTE: values need to be manually entered in .env where applicable.)
+cp .env.example .env
+
 # Deploy CDK Toolkit stack.
 cdk bootstrap
 
@@ -70,3 +73,5 @@ cdk deploy --all
 # (optional) When you are finished make sure to destroy your deployed cdk resources.
 cdk destroy --all
 ```
+
+Due to time constraints the backend server, database and authentication provider is not deployed as part of the cdk stack. Instead they can be run locally as per the `Backend` instructions above.

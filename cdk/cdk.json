@@ -1,5 +1,5 @@
 {
-  "app": "node bin/cdk.js",
+  "app": "node --env-file=.env bin/cdk.js",
   "watch": {
     "include": ["**"],
     "exclude": [
