@@ -56,6 +56,7 @@ class CdkStack extends Stack {
         origin: new S3Origin(bucket, { originAccessIdentity }),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
+      additionalBehaviors: [new EC2Ori()],
       domainNames: [customProps.domainName],
     });
 
