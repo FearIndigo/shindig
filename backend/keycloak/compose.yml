@@ -1,0 +1,12 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    restart: unless-stopped
+    network_mode: "host"
+    command: start-dev
+    volumes:
+      - keycloak-volume:/opt/keycloak/data/
+    env_file: ".env.auth"
+
+volumes:
+  keycloak-volume:

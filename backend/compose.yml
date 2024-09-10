@@ -1,18 +1,16 @@
 services:
   server:
     build: .
-    restart: always
-    ports:
-      - 443:443
+    restart: unless-stopped
+    network_mode: "host"
     depends_on:
       - mongo
     env_file: ".env"
 
   mongo:
     image: mongo
-    restart: always
+    restart: unless-stopped
     ports:
-      # Expose on host port 27018 (Not needed in production)
       - 27018:27017
     volumes:
       - mongo-volume:/data/db
