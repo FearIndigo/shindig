@@ -1,7 +1,7 @@
 import initRxDB from "./rxdb/index.js";
 import { createRxServer } from "rxdb-server/plugins/server";
 import { RxServerAdapterExpress } from "rxdb-server/plugins/adapter-express";
-import authHandler from "./middleware/index.js";
+import authHandler from "./middleware/authHandler.js";
 import addRoutes from "./routes/index.js";
 
 // Initialise RxDB.
