@@ -6,17 +6,7 @@ services:
       - 443:443
     depends_on:
       - mongo
-    environment:
-      # Node environment (defaults to production unless set to development)
-      NODE_ENV: development
-      # Connection string to connect to your mongo db database.
-      MONGODB_URI: mongodb://root:example@mongo:27017
-      # This is used to encrypt authentication cookies and tokens. It should be a random string of at least 32 characters.
-      AUTH_SECRET: "5Dcb8ZPVg4jhhx1syh2hHxbfocR1utumGxIZ+l2iW68="
-      # Amazon Cognito auth provider secrets.
-      AUTH_COGNITO_ID: ""
-      AUTH_COGNITO_SECRET: ""
-      AUTH_COGNITO_ISSUER: ""
+    env_file: ".env"
 
   mongo:
     image: mongo
@@ -27,9 +17,7 @@ services:
     volumes:
       - mongo-volume:/data/db
       - mongo-volume:/data/configdb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    env_file: ".env.db"
 
 volumes:
   mongo-volume:

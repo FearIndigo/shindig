@@ -14,6 +14,13 @@ Technology used:
 # Navigate to backend folder.
 cd ./backend
 
+# Copy env files. (NOTE: values need to be manually entered where applicable.)
+cp .env.example .env
+cp .env.db.example .env.db
+
+# Generate high entropy random string for Auth.js.
+npx auth secret
+
 # Build and run docker containers.
 docker compose up
 ```

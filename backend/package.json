@@ -8,6 +8,7 @@
   "dependencies": {
     "@auth/express": "^0.6.0",
     "cors": "^2.8.5",
+    "express": "^4.20.0",
     "rxdb-server": "^15.32.0"
   }
 }
