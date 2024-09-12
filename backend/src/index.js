@@ -13,7 +13,6 @@ const rxServer = await createRxServer({
   adapter: RxServerAdapterExpress,
   port: 443,
   authHandler,
-  hostname: "0.0.0.0",
 });
 
 // Add routes.
@@ -21,3 +20,5 @@ await addRoutes(rxServer);
 
 // Start the server.
 await rxServer.start();
+
+export default rxServer;

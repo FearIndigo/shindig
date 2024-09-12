@@ -1,21 +1,8 @@
 import { ExpressAuth } from "@auth/express";
-import Keycloak from "@auth/express/providers/keycloak";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import client from "../lib/mongo-client.js";
+import { authConfig } from "../auth/index.js";
 
-export const authConfig = {
-  providers: [Keycloak],
-  adapter: MongoDBAdapter(client),
-  trustHost: true,
-  callbacks: {
-    session({ session, user }) {
-      return session;
-    },
-  },
-};
-
-export default function useAuth(serverApp) {
+export default function addAuthRoutes(rxServer) {
   // Add Auth.js routes
-  serverApp.set("trust proxy", true);
-  serverApp.use("/auth/*", ExpressAuth(authConfig));
+  rxServer.serverApp.set("trust proxy", true);
+  rxServer.serverApp.use("/auth/*", ExpressAuth(authConfig));
 }
