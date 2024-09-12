@@ -4,5 +4,6 @@ export default function addUserRoutes(rxServer) {
   rxServer.addReplicationEndpoint({
     name: "user",
     collection: rxServer.database.collections.users,
+    serverOnlyFields: ["email"],
   });
 }

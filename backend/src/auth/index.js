@@ -42,6 +42,7 @@ export const authConfig = {
             await userCollection.insert({
               id: user.userId,
               name: user.name,
+              email: user.email,
             });
           }
         }

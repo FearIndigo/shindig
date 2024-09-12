@@ -13,7 +13,11 @@ export default {
     name: {
       type: "string",
     },
+    email: {
+      type: "string",
+      format: "email",
+    },
   },
   additionalProperties: false,
-  required: ["id", "name"],
+  required: ["id", "name", "email"],
 };
