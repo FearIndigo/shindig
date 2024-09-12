@@ -3,14 +3,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "npm run test-e2e",
+    "test-e2e": "npx playwright test"
   },
   "dependencies": {
     "@auth/express": "^0.6.0",
     "@auth/mongodb-adapter": "^3.4.2",
     "cors": "^2.8.5",
     "express": "^4.20.0",
+    "express-async-handler": "^1.2.0",
     "mongodb": "^6.8.1",
     "rxdb-server": "^15.32.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^22.5.4"
   }
 }
