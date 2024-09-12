@@ -10,11 +10,35 @@ export default {
       maxLength: 36,
       format: "uuid",
     },
-    name: {
+    userId: {
+      type: "string",
+      ref: "users",
+      format: "uuid",
+    },
+    title: {
+      type: "string",
+    },
+    startAt: {
+      type: "string",
+      format: "date-time",
+    },
+    duration: {
+      type: "string",
+      format: "duration",
+    },
+    location: {
       type: "string",
     },
     description: {
       type: "string",
+    },
+    responses: {
+      type: "array",
+      ref: "responses",
+      items: {
+        type: "string",
+        format: "uuid",
+      },
     },
     interactions: {
       type: "array",
@@ -24,7 +48,15 @@ export default {
         format: "uuid",
       },
     },
+    comments: {
+      type: "array",
+      ref: "comments",
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+    },
   },
   additionalProperties: false,
-  required: ["id", "name"],
+  required: ["id", "userId", "title"],
 };

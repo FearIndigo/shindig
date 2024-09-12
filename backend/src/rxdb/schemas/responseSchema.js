@@ -1,7 +1,7 @@
 export default {
-  title: "interaction schema",
+  title: "response schema",
   version: 0,
-  description: "describes an interaction",
+  description: "describes a response",
   primaryKey: "id",
   type: "object",
   properties: {
@@ -17,8 +17,8 @@ export default {
     },
     type: {
       type: "string",
-      enum: ["like", "heart", "laugh", "sad", "cry"],
-      default: "like",
+      enum: ["invited", "maybe", "going", "notGoing"],
+      default: "invited",
     },
   },
   additionalProperties: false,
