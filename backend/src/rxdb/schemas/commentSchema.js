@@ -10,7 +10,7 @@ export default {
       maxLength: 36,
       format: "uuid",
     },
-    userId: {
+    authorId: {
       type: "string",
       ref: "users",
       format: "uuid",
@@ -26,7 +26,14 @@ export default {
         format: "uuid",
       },
     },
+    updatedAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+    },
   },
   additionalProperties: false,
-  required: ["id", "userId", "message"],
+  required: ["id", "authorId", "message"],
+  indexes: ["updatedAt"],
 };

@@ -20,7 +20,14 @@ export default {
       enum: ["like", "heart", "laugh", "sad", "cry"],
       default: "like",
     },
+    updatedAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+    },
   },
   additionalProperties: false,
   required: ["id", "userId"],
+  indexes: ["updatedAt"],
 };

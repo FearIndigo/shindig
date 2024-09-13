@@ -10,10 +10,13 @@ export default {
       maxLength: 36,
       format: "uuid",
     },
-    userId: {
-      type: "string",
+    authors: {
+      type: "array",
       ref: "users",
-      format: "uuid",
+      items: {
+        type: "string",
+        format: "uuid",
+      },
     },
     title: {
       type: "string",
@@ -56,7 +59,14 @@ export default {
         format: "uuid",
       },
     },
+    updatedAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+    },
   },
   additionalProperties: false,
-  required: ["id", "userId", "title"],
+  required: ["id", "authors", "title"],
+  indexes: ["updatedAt"],
 };

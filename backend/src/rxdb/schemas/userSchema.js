@@ -17,7 +17,14 @@ export default {
       type: "string",
       format: "email",
     },
+    updatedAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+    },
   },
   additionalProperties: false,
   required: ["id", "name", "email"],
+  indexes: ["updatedAt"],
 };
