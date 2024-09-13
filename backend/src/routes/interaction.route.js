@@ -2,6 +2,6 @@ export default function addInteractionRoutes(rxServer) {
   // Replication endpoint.
   rxServer.addReplicationEndpoint({
     name: "interaction",
-    collection: rxServer.database.collections.interactions,
+    collection: rxServer.database.interactions,
   });
 }

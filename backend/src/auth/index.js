@@ -31,15 +31,15 @@ export const authConfig = {
 
         if (trigger === "signIn") {
           // Try find user in database.
-          const userCollection = rxServer.database.collections.users;
-          const dbUser = await userCollection
+          const users = rxServer.database.users;
+          const dbUser = await users
             .findOne({
               selector: { id: user.userId },
             })
             .exec();
           // If no user found add them to the database.
           if (!dbUser) {
-            await userCollection.insert({
+            await users.insert({
               id: user.userId,
               name: user.name,
               email: user.email,
