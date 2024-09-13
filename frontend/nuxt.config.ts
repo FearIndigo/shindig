@@ -4,4 +4,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true, // Pre-render routes.
   srcDir: "src/",
+  router: {
+    options: {
+      scrollBehaviorType: "smooth",
+    },
+  },
 });
