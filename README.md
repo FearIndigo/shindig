@@ -86,6 +86,9 @@ docker compose up
 # Navigate to frontend folder from the repo root directiory.
 cd ./frontend
 
+# Copy env files (NOTE: values need to be manually entered in .env where applicable).
+cp .env.example .env
+
 # Install dependencies.
 npm install
 
