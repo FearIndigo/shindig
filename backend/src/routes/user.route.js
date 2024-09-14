@@ -6,4 +6,10 @@ export default function addUserRoutes(rxServer) {
     collection: rxServer.database.users,
     serverOnlyFields: ["email"],
   });
+
+  rxServer.addRestEndpoint({
+    name: "user",
+    collection: rxServer.database.users,
+    serverOnlyFields: ["email"],
+  });
 }
