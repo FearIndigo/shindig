@@ -1,16 +1,8 @@
-import { getSession } from "@auth/express";
-import { authConfig } from "../auth/index.js";
-
 export default async function authHandler(headers) {
-  const req = {
-    protocol: "http",
-    headers,
-  };
-  const session = await getSession(req, authConfig);
-  const validUntil = new Date(session?.expires).getTime();
+  const validUntil = Date.now() * 2;
 
   return {
-    data: session,
+    data: {},
     validUntil,
   };
 }
