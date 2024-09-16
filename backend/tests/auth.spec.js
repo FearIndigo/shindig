@@ -8,39 +8,36 @@ const testPassword = "password";
 
 test("Basic auth", async ({ page, browser }) => {
   await test.step("should login", async () => {
-    // Go to login page and select keycloak.
-    await page.goto("http://localhost:443/auth/signin");
-    await page.getByText("Keycloak").click();
+    // Go to login page.
+    await page.goto("http://localhost:443/auth/login");
 
     // Fill in form and signin.
     await page.getByText("Username or email").waitFor();
     await page.locator("#username").fill(testUsername);
     await page.locator("#password").fill(testPassword);
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("button", { name: "Sign In" }).click();
 
     // NOTE: for some reason this part fails. I have verified that the request is sent with the correct form data after clicking the button.
-    await page.waitForURL("http://localhost:443");
+    await page.waitForURL("http://localhost:3000");
 
     // Check session status.
     await page.goto("http://localhost:443/auth/session");
     const session = await page.locator("pre").textContent();
     expect(JSON.parse(session ?? "{}")).toEqual({
-      user: {
-        name: "test test",
-        email: "test@test.com",
+      data: {
+        session: expect.any(Object),
       },
-      expires: expect.any(String),
+      validUntil: expect.any(Number),
     });
   });
 
   await test.step("should logout", async () => {
-    // Go to logout page and select sign out.
-    await page.goto("http://localhost:443/auth/signout");
-    await page.getByRole("button", { name: "Sign out" }).click();
+    // Send log out post request.
+    await page.request.post("http://localhost:443/auth/logout");
 
     // Check session status.
     await page.goto("http://localhost:443/auth/session");
     const session = await page.locator("pre").textContent();
-    expect(session).toBe("null");
+    expect(JSON.parse(session ?? "{}")?.data).toEqual({});
   });
 });
