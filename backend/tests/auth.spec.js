@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { Cookie } from "express-session";
 
 // TODO: test flow for creating a new user and logging out.
 
@@ -38,6 +39,8 @@ test("Basic auth", async ({ page, browser }) => {
     // Check session status.
     await page.goto("http://localhost:443/auth/session");
     const session = await page.locator("pre").textContent();
-    expect(JSON.parse(session ?? "{}")?.data).toEqual({});
+    expect(JSON.parse(session ?? "{}")?.data?.session).toEqual({
+      cookie: expect.any(Object),
+    });
   });
 });
