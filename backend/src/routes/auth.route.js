@@ -84,6 +84,8 @@ passport.deserializeUser(function (user, cb) {
 });
 
 export default function addAuthRoutes(rxServer) {
+  rxServer.serverApp.use(passport.session());
+
   rxServer.serverApp.get("/auth/login", passport.authenticate("openidconnect"));
 
   rxServer.serverApp.get(
@@ -109,6 +111,4 @@ export default function addAuthRoutes(rxServer) {
   rxServer.serverApp.get("/auth/session", (req, res) => {
     authHandler(req.headers).then((authData) => res.json(authData));
   });
-
-  rxServer.serverApp.use(passport.session());
 }
