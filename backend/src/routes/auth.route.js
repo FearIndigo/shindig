@@ -2,7 +2,6 @@ import passport from "passport";
 import OpenIDConnectStrategy from "passport-openidconnect";
 import server from "../index.js";
 import { v4 as uuidv4 } from "uuid";
-import authHandler from "../middleware/authHandler.js";
 
 passport.use(
   new OpenIDConnectStrategy(
@@ -109,6 +108,6 @@ export default function addAuthRoutes(rxServer) {
   });
 
   rxServer.serverApp.get("/auth/session", (req, res) => {
-    authHandler(req.headers).then((authData) => res.json(authData));
+    res.json(req.session);
   });
 }
