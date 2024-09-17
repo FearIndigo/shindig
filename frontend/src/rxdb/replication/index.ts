@@ -27,7 +27,7 @@ function addReplication<DocType>(
       withCredentials: true,
     });
 
-    eventSource.onmessage = (ev) => pullStream$.next(ev.data);
+    eventSource.onmessage = (ev) => pullStream$.next(JSON.parse(ev.data));
     eventSource.onerror = () => eventSource.close();
     eventSource.onopen = () => {
       if (firstOpen) {
