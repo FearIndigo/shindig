@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vueuse/rxjs": "^11.1.0",
     "eventsource": "^2.0.2",
     "nuxt": "^3.13.0",
     "rxdb": "^15.33.0",
