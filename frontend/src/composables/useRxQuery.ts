@@ -1,4 +1,3 @@
-import { useObservable } from "@vueuse/rxjs";
 import { type RxCollection, type RxQuery } from "rxdb";
 import type { DatabaseCollections } from "~/rxdb/types";
 
