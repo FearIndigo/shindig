@@ -1,7 +1,17 @@
 <template>
-  <div>
-    <main>
+  <v-app>
+    <LayoutHeader @toggle-nav="navOpen = !navOpen" />
+
+    <LayoutNavDrawer :nav-open="navOpen" @open-updated="(v) => (navOpen = v)" />
+
+    <v-main>
       <slot />
-    </main>
-  </div>
+    </v-main>
+
+    <LayoutFooter />
+  </v-app>
 </template>
+
+<script setup lang="ts">
+const navOpen = ref(false);
+</script>
