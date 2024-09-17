@@ -10,13 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vueuse/core": "^11.1.0",
+    "@vueuse/nuxt": "^11.1.0",
     "@vueuse/rxjs": "^11.1.0",
     "eventsource": "^2.0.2",
     "nuxt": "^3.13.0",
     "rxdb": "^15.33.0",
     "uuid": "^10.0.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vuetify-nuxt-module": "^0.18.3"
   },
   "devDependencies": {
     "@types/uuid": "^10.0.0",
