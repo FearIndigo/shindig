@@ -4,14 +4,11 @@ import { Subject } from "rxjs";
 import { replicateRxCollection } from "rxdb/plugins/replication";
 
 export default function replicateServer(db: Database) {
-  const commentReplicationState = addReplication(db.comments, "/comment/0");
-  const eventReplicationState = addReplication(db.events, "/event/0");
-  const interactionReplicationState = addReplication(
-    db.interactions,
-    "/interaction/0"
-  );
-  const responseReplicationState = addReplication(db.responses, "/response/0");
-  const userReplicationState = addReplication(db.users, "/user/0");
+  addReplication(db.comments, "/comment/0");
+  addReplication(db.events, "/event/0");
+  addReplication(db.interactions, "/interaction/0");
+  addReplication(db.responses, "/response/0");
+  addReplication(db.users, "/user/0");
 }
 
 function addReplication<DocType>(
