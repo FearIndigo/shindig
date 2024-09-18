@@ -5,6 +5,7 @@
         prepend-icon="mdi-alert-circle-outline"
         :title="error?.statusCode"
         :text="error?.statusMessage"
+        color="error"
         max-width="320"
       >
         <v-card-actions>
