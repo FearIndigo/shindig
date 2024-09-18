@@ -7,9 +7,7 @@
     <LayoutNavItems :items="navItems.pages" />
 
     <template v-slot:append>
-      <ClientOnly>
-        <LayoutNavItems :items="navItems.account" />
-      </ClientOnly>
+      <LayoutNavItems :items="navItems.account" />
     </template>
   </v-navigation-drawer>
 </template>

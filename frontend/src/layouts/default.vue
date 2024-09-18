@@ -2,7 +2,10 @@
   <v-app>
     <LayoutHeader @toggle-nav="navOpen = !navOpen" />
 
-    <LayoutNavDrawer :nav-open="navOpen" @open-updated="(v) => (navOpen = v)" />
+    <LayoutNavDrawer
+      :nav-open="navOpen"
+      @open-updated="(v: boolean) => (navOpen = v)"
+    />
 
     <v-main>
       <slot />
