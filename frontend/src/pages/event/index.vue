@@ -1,6 +1,6 @@
 <template>
   <ContainerPage>
-    <p>Hello event page</p>
+    <EventList />
   </ContainerPage>
   <InputCreateEventFAB />
 </template>
