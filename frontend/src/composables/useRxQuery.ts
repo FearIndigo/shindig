@@ -1,4 +1,4 @@
-import { type RxCollection, type RxQuery } from "rxdb";
+import type { RxCollection, RxQuery } from "rxdb";
 import type { DatabaseCollections } from "~/rxdb/types";
 
 export default async function useRxQuery<DocType, ReturnType>(
