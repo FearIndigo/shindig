@@ -1,6 +1,6 @@
 <template>
   <ContainerPage>
-    <p>Hello create event</p>
+    <FormCreateEventForm />
   </ContainerPage>
 </template>
 
