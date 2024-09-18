@@ -7,7 +7,9 @@
     <LayoutNavItems :items="navItems.pages" />
 
     <template v-slot:append>
-      <LayoutNavItems :items="navItems.account" />
+      <ClientOnly>
+        <LayoutNavItems :items="navItems.account" />
+      </ClientOnly>
     </template>
   </v-navigation-drawer>
 </template>
@@ -20,5 +22,15 @@ const navOpen = computed({
   set: (value: boolean) => emit("openUpdated", value),
 });
 
-const navItems = getNavItems();
+const navItems = ref(getNavItems());
+
+const session = await useSessionData();
+if (session.passport?.user) {
+  const user = session.passport.user;
+  navItems.value.account.unshift({
+    label: user.name,
+    icon: "mdi-account-circle",
+    path: `/user/${user.id}`,
+  });
+}
 </script>
