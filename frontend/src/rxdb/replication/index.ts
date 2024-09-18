@@ -51,7 +51,7 @@ function addReplication<DocType>(
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify({ docs }),
+          body: JSON.stringify(docs),
         });
         const response = await rawResponse.json();
         return response;
