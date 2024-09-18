@@ -3,7 +3,6 @@
     prepend-icon="mdi-logout"
     title="Log Out"
     text="Are you sure you want to log out?"
-    variant="tonal"
     max-width="320"
   >
     <v-card-actions class="w-100">

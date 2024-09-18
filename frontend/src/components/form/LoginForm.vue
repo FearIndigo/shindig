@@ -3,7 +3,6 @@
     prepend-icon="mdi-login"
     title="Log In"
     text="Select your login method."
-    variant="tonal"
     max-width="320"
   >
     <v-card-actions class="w-100">
