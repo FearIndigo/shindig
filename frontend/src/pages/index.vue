@@ -1,3 +1,5 @@
 <template>
-  <p>Hello world</p>
+  <ContainerPage>
+    <p>Hello home page</p>
+  </ContainerPage>
 </template>

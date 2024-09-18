@@ -1,5 +1,8 @@
 <template>
-  <div>Hello Events</div>
+  <ContainerPage>
+    <p>Hello event page</p>
+    <InputCreateEventFAB />
+  </ContainerPage>
 </template>
 
 <script setup lang="ts"></script>

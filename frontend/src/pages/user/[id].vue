@@ -1,3 +1,5 @@
 <template>
-  <UserProfile :id="$route.params.id" />
+  <ContainerPage>
+    <UserProfile :id="$route.params.id" />
+  </ContainerPage>
 </template>

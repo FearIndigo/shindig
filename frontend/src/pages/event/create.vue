@@ -1,5 +1,7 @@
 <template>
-  <div>Hello create event</div>
+  <ContainerPage>
+    <p>Hello create event</p>
+  </ContainerPage>
 </template>
 
 <script setup lang="ts">
