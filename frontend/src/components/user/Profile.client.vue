@@ -10,12 +10,14 @@ import type { UserType, UserDocument } from "~/rxdb/types";
 
 const { id } = defineProps(["id"]);
 
-const user = await useRxQuery<UserType, UserDocument | null>("users", (users) =>
-  users.findOne({
-    selector: {
-      id,
-    },
-  })
+const user = await useRxQuery<UserType, UserDocument | null>(
+  "users",
+  (collection) =>
+    collection.findOne({
+      selector: {
+        id,
+      },
+    })
 );
 
 const session = await useSessionData();
