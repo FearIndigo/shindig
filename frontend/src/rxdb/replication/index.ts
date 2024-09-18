@@ -50,6 +50,7 @@ function addReplication<DocType>(
             Accept: "application/json",
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ docs }),
         });
         const response = await rawResponse.json();
@@ -60,7 +61,13 @@ function addReplication<DocType>(
       async handler(lastCheckpoint, batchSize) {
         const minTimestamp = lastCheckpoint ? lastCheckpoint.lwt : 0;
         const rawResponse = await fetch(
-          `${baseUrl}/pull?lwt=${minTimestamp}&limit=${batchSize}`
+          `${baseUrl}/pull?lwt=${minTimestamp}&limit=${batchSize}`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+            credentials: "include",
+          }
         );
         const response = await rawResponse.json();
         return response;
