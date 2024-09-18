@@ -12,7 +12,7 @@ const eventSchema = {
       maxLength: 36,
       format: "uuid",
     },
-    authors: {
+    hosts: {
       type: "array",
       ref: "users",
       items: {
@@ -67,9 +67,13 @@ const eventSchema = {
       maximum: Number.MAX_SAFE_INTEGER,
       multipleOf: 1,
     },
+    private: {
+      type: "boolean",
+      default: false,
+    },
   },
   additionalProperties: false,
-  required: ["id", "authors", "title"],
+  required: ["id", "hosts", "title"],
   indexes: ["updatedAt"],
 } as const satisfies JSONSchema & Record<string, unknown>;
 
