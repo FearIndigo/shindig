@@ -27,7 +27,7 @@ if (session.passport?.user) {
   const user = session.passport.user;
   navItems.value.account.unshift({
     label: user.name,
-    icon: "mdi-account-circle",
+    icon: "mdi-account-outline",
     path: `/user/${user.id}`,
   });
 }
