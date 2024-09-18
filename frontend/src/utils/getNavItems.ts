@@ -9,10 +9,17 @@ export default function getNavItems() {
   const pages: INavItem[] = [
     {
       label: "Feed",
-      icon: "mdi-home",
+      icon: "mdi-newspaper-variant-outline",
       path: "/",
 
       colour: "primary",
+    },
+    {
+      label: "Events",
+      icon: "mdi-calendar-outline",
+      path: "/event",
+
+      colour: "secondary",
     },
   ];
 
