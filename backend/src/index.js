@@ -14,6 +14,7 @@ const rxServer = await createRxServer({
   database: db,
   adapter: RxServerAdapterExpress,
   port: 443,
+  hostname: "0.0.0.0",
   authHandler,
 });
 
