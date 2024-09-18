@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100 d-flex justify-center align-center">
+  <ContainerCenteredPage>
     <FormLogoutForm />
-  </div>
+  </ContainerCenteredPage>
 </template>
