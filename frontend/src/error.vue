@@ -2,10 +2,10 @@
   <NuxtLayout>
     <div class="h-100 d-flex justify-center align-center">
       <v-card
+        prepend-icon="mdi-alert-circle-outline"
         :title="error?.statusCode"
         :text="error?.statusMessage"
         variant="tonal"
-        class="text-center"
         max-width="320"
       >
         <v-card-actions>
