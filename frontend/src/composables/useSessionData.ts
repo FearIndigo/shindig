@@ -15,7 +15,7 @@ interface ISessionData {
 let session: ISessionData;
 
 export default async function useSessionData() {
-  if (isSessionValid()) return session;
+  if (isSessionValid(session)) return session;
 
   const config = useRuntimeConfig();
   const response = await fetch(config.public.apiBase + "/auth/session", {
@@ -26,14 +26,18 @@ export default async function useSessionData() {
   return session;
 }
 
-function isSessionValid() {
+function isSessionValid(s?: ISessionData) {
   // No session data.
-  if (!session) return false;
+  if (!s) return false;
 
-  // Session expired or missing user data.
-  const sessionExpired =
-    new Date(session.cookie.expires).getTime() - Date.now() <= 0;
-  if (sessionExpired || !session.passport) {
+  // Session missing user data.
+  if (!s.passport) {
+    return false;
+  }
+
+  // Session expired.
+  const sessionExpired = new Date(s.cookie.expires).getTime() - Date.now() <= 0;
+  if (sessionExpired) {
     return false;
   }
 
