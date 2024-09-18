@@ -24,12 +24,16 @@ const eventSchema = {
       type: "string",
     },
     startAt: {
-      type: "string",
-      format: "date-time",
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
     },
     duration: {
-      type: "string",
-      format: "duration",
+      type: "number",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
     },
     location: {
       type: "string",
