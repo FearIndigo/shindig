@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async () => {
   if (!session.passport?.user) {
     return abortNavigation({
       statusCode: 401,
-      statusMessage: "Unauthorized: You must be logged in to view this page.",
+      statusMessage: "Unauthorized: You must be logged in to view this page!",
     });
   }
 });
