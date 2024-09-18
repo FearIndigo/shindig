@@ -4,7 +4,6 @@ import { RxServerAdapterExpress } from "rxdb-server/plugins/adapter-express";
 import authHandler from "./middleware/authHandler.js";
 import addMiddleware from "./middleware/index.js";
 import addRoutes from "./routes/index.js";
-import cors from "cors";
 
 // Initialise RxDB.
 const db = await initRxDB();
@@ -17,16 +16,6 @@ const rxServer = await createRxServer({
   hostname: "0.0.0.0",
   authHandler,
 });
-
-let allowedOrigins = ["http://localhost:443", process.env.FRONTEND_URI];
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions = {
-    origin: allowedOrigins.includes(req.header("Origin")),
-    credentials: true,
-  };
-  callback(null, corsOptions);
-};
-rxServer.serverApp.use(cors(corsOptionsDelegate));
 
 // Add middleware.
 await addMiddleware(rxServer);
