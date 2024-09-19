@@ -34,6 +34,6 @@ export default {
     },
   },
   additionalProperties: false,
-  required: ["id", "authorId", "message"],
+  required: ["id", "authorId", "message", "interactions"],
   indexes: ["updatedAt"],
 };

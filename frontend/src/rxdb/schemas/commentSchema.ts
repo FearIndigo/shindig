@@ -36,7 +36,7 @@ const commentSchema = {
     },
   },
   additionalProperties: false,
-  required: ["id", "authorId", "message"],
+  required: ["id", "authorId", "message", "interactions"],
   indexes: ["updatedAt"],
 } as const satisfies JSONSchema & Record<string, unknown>;
 

@@ -20,7 +20,6 @@ const interactionSchema = {
     type: {
       type: "string",
       enum: ["like", "heart", "laugh", "sad", "cry"],
-      default: "like",
     },
     updatedAt: {
       type: "integer",
@@ -30,7 +29,7 @@ const interactionSchema = {
     },
   },
   additionalProperties: false,
-  required: ["id", "userId"],
+  required: ["id", "userId", "type"],
   indexes: ["updatedAt"],
 } as const satisfies JSONSchema & Record<string, unknown>;
 

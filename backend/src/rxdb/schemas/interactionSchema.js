@@ -18,7 +18,6 @@ export default {
     type: {
       type: "string",
       enum: ["like", "heart", "laugh", "sad", "cry"],
-      default: "like",
     },
     updatedAt: {
       type: "integer",
@@ -28,6 +27,6 @@ export default {
     },
   },
   additionalProperties: false,
-  required: ["id", "userId"],
+  required: ["id", "userId", "type"],
   indexes: ["updatedAt"],
 };
