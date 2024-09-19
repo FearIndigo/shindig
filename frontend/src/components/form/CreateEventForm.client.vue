@@ -11,19 +11,29 @@
       <div>
         <v-text-field v-model="event.title" label="Title" />
 
-        <v-text-field v-model="event.location" label="Location" />
+        <v-text-field
+          v-model="event.location"
+          label="Location"
+          prepend-inner-icon="mdi-map-marker"
+        />
 
-        <p class="mb-4 ml-2">Start time here...</p>
+        <InputDateTime v-model="event.startAt" label="Start" />
 
-        <p class="mb-4 ml-2">Optional end time here...</p>
+        <v-checkbox
+          v-model="useEndAt"
+          label="Use end date and time"
+        ></v-checkbox>
+
+        <InputDateTime v-if="useEndAt" v-model="endAt" label="End" />
 
         <v-textarea v-model="event.description" label="Description" />
 
-        <v-switch
-          v-model="event.private"
-          label="Private event"
-          color="primary"
-        />
+        <v-select
+          v-model="event.visibility"
+          :items="visibilityItems"
+          label="Visibility"
+          prepend-inner-icon="mdi-eye-outline"
+        ></v-select>
 
         <p class="ml-2">Hosts / Co-hosts here...</p>
       </div>
@@ -38,6 +48,29 @@
 <script setup lang="ts">
 import type { EventType } from "~/rxdb/types";
 
+const visibilityItems = ["Private", "Public", "Friends"];
+
+const event = ref<EventType>({
+  id: uuidv4(),
+  hosts: [],
+  title: "",
+  startAt: Date.now(),
+  duration: 0,
+  location: "",
+  description: "",
+  responses: [],
+  interactions: [],
+  comments: [],
+  visibility: "Private",
+});
+
+const useEndAt = ref(false);
+
+const endAt = computed({
+  get: () => event.value.startAt + event.value.duration,
+  set: (value: number) => (event.value.duration = value - event.value.startAt),
+});
+
 const session = await useSessionData();
 
 if (!session.passport?.user) {
@@ -48,22 +81,14 @@ if (!session.passport?.user) {
 }
 const user = session.passport.user;
 
-const event = ref<EventType>({
-  id: uuidv4(),
-  hosts: [user.id],
-  title: "",
-  startAt: Date.now(),
-  duration: 0,
-  location: "",
-  description: "",
-  responses: [],
-  interactions: [],
-  comments: [],
-  private: true,
-});
+event.value.hosts.push(user.id);
 
 async function submit() {
   const db = await useRxDB();
+
+  if (!useEndAt) {
+    event.value.duration = 0;
+  }
 
   const newEvent = await db.events.insert(toRaw(event.value));
 
