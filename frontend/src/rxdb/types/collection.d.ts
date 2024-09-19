@@ -10,13 +10,11 @@ import type {
 export type CommentCollection = RxCollection<CommentType>;
 export type EventCollection = RxCollection<EventType>;
 export type InteractionCollection = RxCollection<InteractionType>;
-export type ResponseCollection = RxCollection<ResponseType>;
 export type UserCollection = RxCollection<UserType>;
 
 export type DatabaseCollections = {
   comments: CommentCollection;
   events: EventCollection;
   interactions: InteractionCollection;
-  responses: ResponseCollection;
   users: UserCollection;
 };
