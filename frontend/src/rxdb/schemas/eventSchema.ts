@@ -53,7 +53,7 @@ const eventSchema = {
           },
           type: {
             type: "string",
-            enum: ["invited", "maybe", "going", "notGoing"],
+            enum: ["Invited", "Maybe", "Going", "Can't go"],
           },
         },
         additionalProperties: false,
@@ -78,7 +78,7 @@ const eventSchema = {
     },
     visibility: {
       type: "string",
-      enum: ["private", "public"],
+      enum: ["Private", "Public", "Friends"],
     },
     updatedAt: {
       type: "integer",

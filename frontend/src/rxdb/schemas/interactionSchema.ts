@@ -19,7 +19,7 @@ const interactionSchema = {
     },
     type: {
       type: "string",
-      enum: ["like", "heart", "laugh", "sad", "cry"],
+      enum: ["Like", "Heart", "Laugh", "Sad", "Cry"],
     },
     updatedAt: {
       type: "integer",
