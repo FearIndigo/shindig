@@ -8,3 +8,7 @@ export type CommentType = FromSchema<typeof commentSchema>;
 export type EventType = FromSchema<typeof eventSchema>;
 export type InteractionType = FromSchema<typeof interactionSchema>;
 export type UserType = FromSchema<typeof userSchema>;
+
+export type ResponseType = FromSchema<
+  typeof eventSchema.properties.responses.items
+>;
