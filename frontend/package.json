@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.0.2",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
     "@vueuse/rxjs": "^11.1.0",
+    "date-fns": "^4.1.0",
     "eventsource": "^2.0.2",
     "nuxt": "^3.13.0",
     "rxdb": "^15.33.0",
