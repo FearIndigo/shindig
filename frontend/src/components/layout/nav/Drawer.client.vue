@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="navOpen"
+    v-model="open"
     :location="$vuetify.display.mobile ? 'bottom' : undefined"
     temporary
   >
@@ -13,12 +13,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["navOpen"]);
-const emit = defineEmits(["openUpdated"]);
-const navOpen = computed({
-  get: () => props.navOpen,
-  set: (value: boolean) => emit("openUpdated", value),
-});
+const open = defineModel<boolean>();
 
 const navItems = ref(getNavItems());
 
