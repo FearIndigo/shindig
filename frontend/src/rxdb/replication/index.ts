@@ -7,7 +7,6 @@ export default function replicateServer(db: Database) {
   addReplication(db.comments, "/comment/0");
   addReplication(db.events, "/event/0");
   addReplication(db.interactions, "/interaction/0");
-  addReplication(db.responses, "/response/0");
   addReplication(db.users, "/user/0");
 }
 
