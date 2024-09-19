@@ -41,10 +41,21 @@ export default {
     },
     responses: {
       type: "array",
-      ref: "responses",
       items: {
-        type: "string",
-        format: "uuid",
+        type: "object",
+        properties: {
+          userId: {
+            type: "string",
+            ref: "users",
+            format: "uuid",
+          },
+          type: {
+            type: "string",
+            enum: ["invited", "maybe", "going", "notGoing"],
+          },
+        },
+        additionalProperties: false,
+        required: ["userId", "type"],
       },
     },
     interactions: {
@@ -63,18 +74,30 @@ export default {
         format: "uuid",
       },
     },
+    visibility: {
+      type: "string",
+      enum: ["private", "public"],
+    },
     updatedAt: {
       type: "integer",
       minimum: 0,
       maximum: Number.MAX_SAFE_INTEGER,
       multipleOf: 1,
     },
-    private: {
-      type: "boolean",
-      default: false,
-    },
   },
   additionalProperties: false,
-  required: ["id", "hosts", "title"],
+  required: [
+    "id",
+    "hosts",
+    "title",
+    "startAt",
+    "duration",
+    "location",
+    "description",
+    "responses",
+    "interactions",
+    "comments",
+    "visibility",
+  ],
   indexes: ["updatedAt"],
 };
