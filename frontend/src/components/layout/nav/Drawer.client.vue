@@ -15,11 +15,10 @@ const navItems = ref(getNavItems());
 
 const session = await useSessionData();
 if (session.passport?.user) {
-  const user = session.passport.user;
   navItems.value.account.unshift({
-    label: user.name,
+    label: "Your Account",
     icon: "mdi-account-outline",
-    path: `/user/${user.id}`,
+    path: `/user/${session.passport.user.id}`,
   });
 }
 </script>
