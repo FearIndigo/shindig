@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <v-list lines="three">
     <template v-for="event in events" :key="event.id">
       <EventPreview :event="event" />
     </template>
-  </div>
+  </v-list>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +32,7 @@ const events = await useRxQuery<EventType, EventDocument[]>(
           { hosts: { $in: [userId] } },
         ],
       },
+      sort: [{ startAt: "desc" }],
     })
 );
 </script>
