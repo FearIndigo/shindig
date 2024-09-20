@@ -18,8 +18,17 @@ const events = await useRxQuery<EventType, EventDocument[]>(
     collection.find({
       selector: {
         $or: [
-          { private: false },
-          { responses: { $in: [userId] } }, // Might need to denormalise responses for this to work.
+          // Event is public.
+          { visibility: "Public" },
+          // User is invited.
+          {
+            responses: {
+              $elemMatch: {
+                userId,
+              },
+            },
+          },
+          // User is a host.
           { hosts: { $in: [userId] } },
         ],
       },
