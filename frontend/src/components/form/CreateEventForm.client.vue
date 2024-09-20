@@ -14,7 +14,7 @@
         <v-text-field
           v-model="event.location"
           label="Location"
-          prepend-inner-icon="mdi-map-marker"
+          prepend-inner-icon="mdi-map-marker-outline"
         />
 
         <InputDateTime v-model="event.startAt" label="Start" />
@@ -24,7 +24,12 @@
           label="Use end date and time"
         ></v-checkbox>
 
-        <InputDateTime v-if="useEndAt" v-model="endAt" label="End" />
+        <InputDateTime
+          v-if="useEndAt"
+          v-model="endAt"
+          label="End"
+          :min-time="event.startAt"
+        />
 
         <v-textarea v-model="event.description" label="Description" />
 
@@ -35,7 +40,11 @@
           prepend-inner-icon="mdi-eye-outline"
         ></v-select>
 
-        <p class="ml-2">Hosts / Co-hosts here...</p>
+        <InputMultiUserList
+          v-model="event.hosts"
+          :exclude-users="[user.id]"
+          label="Co-hosts"
+        />
       </div>
 
       <v-divider></v-divider>
@@ -81,14 +90,14 @@ if (!session.passport?.user) {
 }
 const user = session.passport.user;
 
-event.value.hosts.push(user.id);
-
 async function submit() {
   const db = await useRxDB();
 
   if (!useEndAt) {
     event.value.duration = 0;
   }
+
+  event.value.hosts.push(user.id);
 
   const newEvent = await db.events.insert(toRaw(event.value));
 
