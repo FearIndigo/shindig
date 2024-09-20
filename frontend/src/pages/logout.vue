@@ -1,5 +1,5 @@
 <template>
-  <ContainerCenteredPage>
+  <ContainerPageCentered>
     <FormLogoutForm />
-  </ContainerCenteredPage>
+  </ContainerPageCentered>
 </template>

@@ -1,8 +1,11 @@
 <template>
   <ContainerPage>
+    <InputBreadcrumbs />
+
     <EventList />
+
+    <InputCreateEventFAB />
   </ContainerPage>
-  <InputCreateEventFAB />
 </template>
 
 <script setup lang="ts"></script>

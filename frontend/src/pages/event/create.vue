@@ -1,5 +1,7 @@
 <template>
   <ContainerPage>
+    <InputBreadcrumbs />
+
     <FormCreateEventForm />
   </ContainerPage>
 </template>
