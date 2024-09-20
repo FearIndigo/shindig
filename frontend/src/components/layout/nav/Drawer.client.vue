@@ -1,9 +1,5 @@
 <template>
-  <v-navigation-drawer
-    v-model="open"
-    :location="$vuetify.display.mobile ? 'bottom' : undefined"
-    temporary
-  >
+  <v-navigation-drawer v-model="open" temporary>
     <LayoutNavItems :items="navItems.pages" />
 
     <template v-slot:append>

@@ -11,14 +11,12 @@ export default function getNavItems() {
       label: "Feed",
       icon: "mdi-newspaper-variant-outline",
       path: "/",
-
       colour: "primary",
     },
     {
       label: "Events",
       icon: "mdi-calendar-outline",
       path: "/event",
-
       colour: "secondary",
     },
   ];
