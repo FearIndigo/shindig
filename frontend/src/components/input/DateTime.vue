@@ -38,19 +38,19 @@ const props = defineProps<{ label: string; minTime?: number }>();
 const date = computed({
   get: () => format(new TZDate(timestamp.value, timeZone.value), "yyyy-MM-dd"),
   set: (value: string) =>
-    (timestamp.value = new TZDate(
-      `${value}T${time.value}:00`,
-      timeZone.value
-    ).getTime()),
+    (timestamp.value = Math.max(
+      new TZDate(`${value}T${time.value}:00`, timeZone.value).getTime(),
+      props.minTime ?? 0
+    )),
 });
 
 const time = computed({
   get: () => format(new TZDate(timestamp.value, timeZone.value), "HH:mm"),
   set: (value: string) =>
-    (timestamp.value = new TZDate(
-      `${date.value}T${value}:00`,
-      timeZone.value
-    ).getTime()),
+    (timestamp.value = Math.max(
+      new TZDate(`${date.value}T${value}:00`, timeZone.value).getTime(),
+      Math.max(props.minTime ?? 0)
+    )),
 });
 
 const timeZone = ref(Intl.DateTimeFormat().resolvedOptions().timeZone);
