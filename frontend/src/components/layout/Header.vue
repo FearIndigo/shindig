@@ -6,7 +6,9 @@
 
     <v-app-bar-title>
       <NuxtLink to="/" custom>
-        <v-btn to="/" size="large" rounded> Shindig </v-btn>
+        <v-btn to="/" size="large" variant="outlined" color="primary" rounded>
+          Shindig
+        </v-btn>
       </NuxtLink>
     </v-app-bar-title>
 
