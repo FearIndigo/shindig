@@ -1,9 +1,7 @@
 <template>
-  <v-list lines="three">
-    <template v-for="event in events" :key="event.id">
-      <EventPreview :event="event" />
-    </template>
-  </v-list>
+  <div>
+    <EventList v-if="events" :events="events" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -31,6 +29,8 @@ const events = await useRxQuery<EventType, EventDocument[]>(
           // User is a host.
           { hosts: { $in: [userId] } },
         ],
+        // Events start now or in the future.
+        startAt: { $gte: Date.now() },
       },
       sort: [{ startAt: "desc" }],
     })

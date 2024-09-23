@@ -2,10 +2,8 @@
   <ContainerPage>
     <InputBreadcrumbs />
 
-    <EventList />
+    <EventSearch />
 
     <InputCreateEventFAB />
   </ContainerPage>
 </template>
-
-<script setup lang="ts"></script>
