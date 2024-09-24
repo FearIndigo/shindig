@@ -33,9 +33,9 @@
 <script setup lang="ts">
 import type { EventDocument } from "~/rxdb/types";
 
-const { event } = defineProps<{
+const props = defineProps<{
   event: EventDocument;
 }>();
 
-const timeText = getEventTimeText(event);
+const timeText = getEventTimeText(props.event);
 </script>

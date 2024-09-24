@@ -15,13 +15,15 @@
 <script setup lang="ts">
 import type { EventDocument, CommentCollection } from "~/rxdb/types";
 
-const { event } = defineProps<{ event: EventDocument }>();
+const props = defineProps<{ event: EventDocument }>();
 
 const query = computed(() => {
+  // TODO: see if there is a better way to register the dependency.
+  const deps = [props.event.comments];
   return (collection: CommentCollection) =>
     collection.find({
       selector: {
-        id: { $in: event.comments },
+        id: { $in: props.event.comments },
       },
       sort: [{ createdAt: "desc" }],
     });
