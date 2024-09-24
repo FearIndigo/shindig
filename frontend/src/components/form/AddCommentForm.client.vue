@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import type { EventDocument } from "~/rxdb/types";
 
-const { event } = defineProps<{ event: EventDocument }>();
+const props = defineProps<{ event: EventDocument }>();
 
 const valid = ref();
 const form = ref(null);
@@ -41,8 +41,8 @@ async function submit() {
   });
 
   // Add new comment to event.
-  await event.incrementalPatch({
-    comments: [...event.comments, newComment.id],
+  await props.event.incrementalPatch({
+    comments: [...props.event.comments, newComment.id],
   });
 
   // Reset form.
