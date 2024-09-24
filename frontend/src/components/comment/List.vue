@@ -10,7 +10,7 @@
     variant="elevated"
     rounded
   >
-    <template v-for="(comment, i) in $props.comments" :key="comment.id">
+    <template v-for="comment in $props.comments" :key="comment.id">
       <CommentItem :comment="comment" />
     </template>
   </v-list>

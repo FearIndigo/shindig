@@ -10,7 +10,7 @@
     variant="elevated"
     rounded
   >
-    <template v-for="(event, i) in $props.events" :key="event.id">
+    <template v-for="event in $props.events" :key="event.id">
       <EventPreview :event="event" />
     </template>
   </v-list>
