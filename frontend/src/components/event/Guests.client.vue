@@ -22,11 +22,11 @@
 
         <v-tabs-window v-model="tab">
           <v-tabs-window-item
-            v-for="(type, i) in Object.keys(filteredIds)"
+            v-for="([type, ids], i) in Object.entries(filteredIds)"
             :key="type"
             :value="type"
           >
-            <UserList v-if="guestLists[i].value" :users="guestLists[i].value" />
+            <UserList :users="getUsers(ids)" />
           </v-tabs-window-item>
         </v-tabs-window>
 
@@ -41,30 +41,43 @@
 </template>
 
 <script setup lang="ts">
-import type { EventDocument, UserDocument, UserType } from "~/rxdb/types";
+import type {
+  EventDocument,
+  UserCollection,
+  UserDocument,
+  UserType,
+} from "~/rxdb/types";
 const { event } = defineProps<{ event: EventDocument }>();
 
 const tab = ref(null);
-const filteredIds = event.responses.reduce(
-  (acc: Record<string, string[]>, response) => {
-    if (acc[response.type]) acc[response.type].push(response.userId);
-    else acc[response.type] = [response.userId];
-    return acc;
-  },
-  { Going: event.hosts }
+const filteredIds = computed(() =>
+  event.responses.reduce(
+    (acc: Record<string, string[]>, response) => {
+      if (acc[response.type]) acc[response.type].push(response.userId);
+      else acc[response.type] = [response.userId];
+      return acc;
+    },
+    { Going: event.hosts }
+  )
 );
 
-const previewText = `${filteredIds.Going.length} ${
-  filteredIds.Going.length > 1 ? "people are" : "person is"
-} going`;
-
-const guestLists = await Promise.all(
-  Object.values(filteredIds).map(async (ids) => {
-    return await useRxQuery<UserType, UserDocument[]>("users", (collection) =>
-      collection.find({
-        selector: { id: { $in: ids } },
-      })
-    );
-  })
+const previewText = computed(
+  () =>
+    `${filteredIds.value.Going.length} ${
+      filteredIds.value.Going.length > 1 ? "people are" : "person is"
+    } going`
 );
+
+const query = computed(
+  () => (collection: UserCollection) =>
+    collection.find({
+      selector: { id: { $in: Object.values(filteredIds.value).flat() } },
+    })
+);
+
+const allGuests = await useRxQuery<UserType, UserDocument[]>("users", query);
+
+function getUsers(ids: string[]) {
+  return allGuests.value?.filter((user) => ids.includes(user.id)) ?? [];
+}
 </script>

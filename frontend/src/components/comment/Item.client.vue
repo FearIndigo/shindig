@@ -1,0 +1,32 @@
+<template>
+  <v-list-item class="px-6">
+    <div v-if="user" class="d-flex ga-2 align-center">
+      <v-avatar color="secondary" size="small">{{
+        user.name[0].toUpperCase()
+      }}</v-avatar>
+      <NuxtLink
+        :to="`/user/${user.id}`"
+        style="text-decoration: none; color: inherit"
+      >
+        <span class="text-subtitle-1">
+          {{ user.name }}
+        </span>
+      </NuxtLink>
+    </div>
+
+    <pre class="text-body-1 py-2">{{ comment.message }}</pre>
+
+    <span class="text-caption text-disabled">{{ createdText }}</span>
+  </v-list-item>
+</template>
+
+<script setup lang="ts">
+import { format } from "date-fns";
+import type { CommentDocument, UserType } from "~/rxdb/types";
+
+const { comment } = defineProps<{ comment: CommentDocument }>();
+
+const user: UserType | null = await comment.populate("authorId");
+
+const createdText = format(new Date(comment.createdAt), "Pp");
+</script>

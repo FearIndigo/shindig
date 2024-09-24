@@ -1,5 +1,5 @@
 <template>
-  <p v-if="comments.length === 0" class="text-disabled">
+  <p v-if="comments.length === 0" class="text-disabled pa-6">
     No comments to display...
   </p>
   <v-list
@@ -10,8 +10,9 @@
     variant="elevated"
     rounded
   >
-    <template v-for="comment in $props.comments" :key="comment.id">
+    <template v-for="(comment, i) in $props.comments" :key="comment.id">
       <CommentItem :comment="comment" />
+      <v-divider v-if="i < $props.comments.length - 1"></v-divider>
     </template>
   </v-list>
 </template>

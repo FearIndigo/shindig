@@ -6,35 +6,37 @@
 
 <script setup lang="ts">
 import type { MangoQuerySelector } from "rxdb";
-import type { EventType, EventDocument } from "~/rxdb/types";
+import type { EventType, EventDocument, EventCollection } from "~/rxdb/types";
 
 const props = defineProps<{
   pastEvents?: boolean;
   includePublic?: boolean;
 }>();
 const session = await useSessionData();
-const userId = session.passport?.user.id ?? "";
 
-const filters: MangoQuerySelector<EventType>[] = [
-  // User is invited.
-  {
-    responses: {
-      $elemMatch: {
-        userId,
+const query = computed(() => {
+  const userId = session.passport?.user.id ?? "";
+
+  const filters: MangoQuerySelector<EventType>[] = [
+    // User is invited.
+    {
+      responses: {
+        $elemMatch: {
+          userId,
+        },
       },
     },
-  },
-  // User is a host.
-  { hosts: { $in: [userId] } },
-];
+    // User is a host.
+    { hosts: { $in: [userId] } },
+  ];
 
-if (props.includePublic) {
-  filters.push({ visibility: "Public" });
-}
+  // Include public events.
+  if (props.includePublic) {
+    filters.push({ visibility: "Public" });
+  }
 
-const events = await useRxQuery<EventType, EventDocument[]>(
-  "events",
-  (collection) =>
+  // Return generated query builder.
+  return (collection: EventCollection) =>
     collection.find({
       selector: {
         $or: filters,
@@ -43,6 +45,8 @@ const events = await useRxQuery<EventType, EventDocument[]>(
       },
       // Sort events by starting time.
       sort: [{ startAt: props.pastEvents ? "desc" : "asc" }],
-    })
-);
+    });
+});
+
+const events = await useRxQuery<EventType, EventDocument[]>("events", query);
 </script>

@@ -7,13 +7,17 @@ import type { EventType, EventDocument } from "~/rxdb/types";
 
 const { id } = defineProps<{ id: string }>();
 
-const event = await useRxQuery<EventType, EventDocument | null>(
-  "events",
-  (collection) =>
+const query = computed(
+  () => (collection) =>
     collection.findOne({
       selector: {
         id,
       },
     })
+);
+
+const event = await useRxQuery<EventType, EventDocument | null>(
+  "events",
+  query
 );
 </script>

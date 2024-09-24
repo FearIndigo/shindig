@@ -20,15 +20,13 @@
 
         <EventVisibility :visibility="event.visibility" />
 
-        <p class="px-6 my-6">
-          {{ event.description }}
-        </p>
+        <div class="px-6 my-6">
+          <pre class="text-body-1">{{ event.description }}</pre>
+        </div>
       </div>
     </v-sheet>
 
-    <v-sheet class="pa-6 d-flex flex-column ga-6" elevation="1" rounded>
-      <h3>Comments</h3>
-    </v-sheet>
+    <EventComments :event="event" />
   </div>
 </template>
 

@@ -11,15 +11,16 @@
 import type { EventDocument, UserDocument, UserType } from "~/rxdb/types";
 const { event } = defineProps<{ event: EventDocument }>();
 
-const hosts = await useRxQuery<UserType, UserDocument[]>(
-  "users",
-  (collection) =>
+const query = computed(
+  () => (collection) =>
     collection.find({
       selector: {
         id: { $in: event.hosts },
       },
     })
 );
+
+const hosts = await useRxQuery<UserType, UserDocument[]>("users", query);
 
 const hostsText = computed(() => {
   if (!hosts.value) return "";
