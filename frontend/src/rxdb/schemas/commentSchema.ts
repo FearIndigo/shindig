@@ -28,6 +28,13 @@ const commentSchema = {
         format: "uuid",
       },
     },
+    createdAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+      final: true,
+    },
     updatedAt: {
       type: "integer",
       minimum: 0,
@@ -36,8 +43,8 @@ const commentSchema = {
     },
   },
   additionalProperties: false,
-  required: ["id", "authorId", "message", "interactions"],
-  indexes: ["updatedAt"],
+  required: ["id", "authorId", "message", "interactions", "createdAt"],
+  indexes: ["updatedAt", "createdAt"],
 } as const satisfies JSONSchema & Record<string, unknown>;
 
 export default commentSchema;

@@ -26,6 +26,13 @@ export default {
         format: "uuid",
       },
     },
+    createdAt: {
+      type: "integer",
+      minimum: 0,
+      maximum: Number.MAX_SAFE_INTEGER,
+      multipleOf: 1,
+      final: true,
+    },
     updatedAt: {
       type: "integer",
       minimum: 0,
@@ -34,6 +41,6 @@ export default {
     },
   },
   additionalProperties: false,
-  required: ["id", "authorId", "message", "interactions"],
+  required: ["id", "authorId", "message", "interactions", "createdAt"],
   indexes: ["updatedAt"],
 };

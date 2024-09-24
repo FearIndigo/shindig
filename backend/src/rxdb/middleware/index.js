@@ -2,6 +2,11 @@ export default function addCollectionMiddleware(collection) {
   collection.preInsert(function (data) {
     // Set updatedAt on new documents.
     data.updatedAt = Date.now();
+
+    // Set updatedAt on new documents that support it.
+    if (Object.hasOwn(data, "createdAt")) {
+      data.createdAt = Date.now();
+    }
   }, true);
 
   collection.preSave(function (data) {
