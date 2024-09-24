@@ -13,7 +13,7 @@
       <span class="text-caption text-disabled">{{ timestampText }}</span>
     </div>
 
-    <pre class="text-body-1 py-2">{{ comment.message }}</pre>
+    <p>{{ comment.message }}</p>
   </v-list-item>
 </template>
 
