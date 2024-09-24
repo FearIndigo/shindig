@@ -44,6 +44,7 @@
           v-model="event.hosts"
           :exclude-users="[user.id]"
           label="Co-hosts"
+          icon="mdi-account-star-outline"
         />
       </div>
 

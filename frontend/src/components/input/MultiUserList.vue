@@ -5,7 +5,7 @@
     item-title="name"
     item-value="id"
     :label="$props.label"
-    prepend-inner-icon="mdi-account-star-outline"
+    :prepend-inner-icon="$props.icon"
     multiple
     chips
   ></v-autocomplete>
@@ -18,6 +18,7 @@ const users = defineModel<string[]>();
 const props = defineProps<{
   label?: string;
   excludeUsers?: string[];
+  icon?: string;
 }>();
 
 const allUsers = await useRxQuery<UserType, UserDocument[]>(
