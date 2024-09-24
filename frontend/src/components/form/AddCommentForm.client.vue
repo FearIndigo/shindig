@@ -6,7 +6,7 @@
       <v-text-field
         v-model="message"
         :rules="[formRules.required]"
-        label="Description"
+        label="Message"
       />
 
       <v-btn type="submit" color="primary" block>Add Comment</v-btn>
