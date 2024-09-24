@@ -20,7 +20,7 @@ export default function getNavItems() {
       colour: "secondary",
     },
     {
-      label: "Your past events",
+      label: "Past events",
       icon: "mdi-calendar-refresh-outline",
       path: "/event/past",
       colour: "secondary",

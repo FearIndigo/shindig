@@ -1,14 +1,11 @@
 <template>
-  <div>
-    {{ user }}
-    {{ loggedIn }}
-  </div>
+  <UserView v-if="user" :user="user" />
 </template>
 
 <script setup lang="ts">
 import type { UserType, UserDocument } from "~/rxdb/types";
 
-const { id } = defineProps(["id"]);
+const { id } = defineProps<{ id: string }>();
 
 const user = await useRxQuery<UserType, UserDocument | null>(
   "users",
@@ -19,8 +16,4 @@ const user = await useRxQuery<UserType, UserDocument | null>(
       },
     })
 );
-
-const session = await useSessionData();
-
-const loggedIn = computed(() => session.passport?.user.id === id);
 </script>
