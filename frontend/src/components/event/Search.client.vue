@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EventList v-if="events" :events="events" />
+    <EventList v-if="events" :events="events" elevation="1" />
   </div>
 </template>
 
