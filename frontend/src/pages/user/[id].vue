@@ -2,6 +2,6 @@
   <ContainerPage>
     <InputBreadcrumbs />
 
-    <UserProfile :id="$route.params.id" />
+    <UserPage :id="$route.params.id" />
   </ContainerPage>
 </template>

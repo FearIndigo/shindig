@@ -6,7 +6,6 @@
     lines="one"
     :elevation="$props.elevation"
     variant="elevated"
-    rounded
   >
     <template v-for="user in $props.users" :key="user.id">
       <UserPreview :user="user" />

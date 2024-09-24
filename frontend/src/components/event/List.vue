@@ -8,7 +8,6 @@
     lines="three"
     :elevation="$props.elevation"
     variant="elevated"
-    rounded
   >
     <template v-for="event in $props.events" :key="event.id">
       <EventPreview :event="event" />
