@@ -5,16 +5,18 @@
 <script setup lang="ts">
 import type { UserCollection } from "~/rxdb/types";
 
-const { id } = defineProps<{ id: string }>();
+const props = defineProps<{ id: string }>();
 
-const query = computed(
-  () => (collection: UserCollection) =>
+const query = computed(() => {
+  // TODO: see if there is a better way to register the dependency.
+  const deps = [props.id];
+  return (collection: UserCollection) =>
     collection.findOne({
       selector: {
-        id,
+        id: props.id,
       },
-    })
-);
+    });
+});
 
 const user = await useRxQuery("users", query);
 </script>

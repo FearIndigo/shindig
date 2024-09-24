@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-const { items = [] } = defineProps<{
+defineProps<{
   items: INavItem[];
 }>();
 </script>

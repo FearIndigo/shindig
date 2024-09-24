@@ -13,9 +13,9 @@
 <script setup lang="ts">
 import type { EventType } from "~/rxdb/types";
 
-const { event } = defineProps<{
+const props = defineProps<{
   event: EventType;
 }>();
 
-const timeText = getEventTimeText(event);
+const timeText = getEventTimeText(props.event);
 </script>

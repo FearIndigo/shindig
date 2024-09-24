@@ -19,9 +19,7 @@
 import { format } from "date-fns";
 import type { CommentDocument, UserType } from "~/rxdb/types";
 
-const { comment } = defineProps<{ comment: CommentDocument }>();
-
-const user: UserType | null = await comment.populate("authorId");
-
-const createdText = format(new Date(comment.createdAt), "Pp");
+const props = defineProps<{ comment: CommentDocument }>();
+const createdText = format(new Date(props.comment.createdAt), "Pp");
+const user: UserType | null = await props.comment.populate("authorId");
 </script>

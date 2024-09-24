@@ -35,6 +35,9 @@ const query = computed(() => {
     filters.push({ visibility: "Public" });
   }
 
+  // TODO: see if there is a better way to register the dependency.
+  const deps = [props.pastEvents];
+
   // Return generated query builder.
   return (collection: EventCollection) =>
     collection.find({

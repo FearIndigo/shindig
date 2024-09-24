@@ -21,14 +21,16 @@ const props = defineProps<{
   icon?: string;
 }>();
 
-const query = computed(
-  () => (collection: UserCollection) =>
+const query = computed(() => {
+  // TODO: see if there is a better way to register the dependency.
+  const deps = [props.excludeUsers];
+  return (collection: UserCollection) =>
     collection.find({
       selector: {
         id: { $nin: props.excludeUsers },
       },
-    })
-);
+    });
+});
 
 const allUsers = await useRxQuery("users", query);
 </script>

@@ -8,8 +8,7 @@
 
 <script setup lang="ts">
 import type { UserType } from "~/rxdb/types";
-
-const { user } = defineProps<{
+defineProps<{
   user: UserType;
 }>();
 </script>

@@ -42,17 +42,17 @@
 
 <script setup lang="ts">
 import type { EventDocument, UserCollection } from "~/rxdb/types";
-const { event } = defineProps<{ event: EventDocument }>();
+const props = defineProps<{ event: EventDocument }>();
 
 const tab = ref(null);
 const filteredIds = computed(() =>
-  event.responses.reduce(
+  props.event.responses.reduce(
     (acc: Record<string, string[]>, response) => {
       if (acc[response.type]) acc[response.type].push(response.userId);
       else acc[response.type] = [response.userId];
       return acc;
     },
-    { Going: event.hosts }
+    { Going: props.event.hosts }
   )
 );
 
@@ -63,12 +63,14 @@ const previewText = computed(
     } going`
 );
 
-const query = computed(
-  () => (collection: UserCollection) =>
+const query = computed(() => {
+  // TODO: see if there is a better way to register the dependency.
+  const deps = [filteredIds.value];
+  return (collection: UserCollection) =>
     collection.find({
       selector: { id: { $in: Object.values(filteredIds.value).flat() } },
-    })
-);
+    });
+});
 
 const allGuests = await useRxQuery("users", query);
 
