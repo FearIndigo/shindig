@@ -7,7 +7,6 @@
     class="pa-0"
     lines="three"
     :elevation="$props.elevation"
-    variant="elevated"
     rounded
   >
     <template v-for="(comment, i) in $props.comments" :key="comment.id">
