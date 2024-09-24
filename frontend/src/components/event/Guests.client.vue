@@ -20,6 +20,8 @@
           </template>
         </v-tabs>
 
+        <v-divider></v-divider>
+
         <v-tabs-window v-model="tab">
           <v-tabs-window-item
             v-for="([type, ids], i) in Object.entries(filteredIds)"
@@ -29,6 +31,8 @@
             <UserList :users="getUsers(ids)" />
           </v-tabs-window-item>
         </v-tabs-window>
+
+        <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
