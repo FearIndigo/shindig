@@ -3,12 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import type { EventType, EventDocument } from "~/rxdb/types";
+import type { EventCollection } from "~/rxdb/types";
 
 const { id } = defineProps<{ id: string }>();
 
 const query = computed(
-  () => (collection) =>
+  () => (collection: EventCollection) =>
     collection.findOne({
       selector: {
         id,
@@ -16,8 +16,5 @@ const query = computed(
     })
 );
 
-const event = await useRxQuery<EventType, EventDocument | null>(
-  "events",
-  query
-);
+const event = await useRxQuery("events", query);
 </script>

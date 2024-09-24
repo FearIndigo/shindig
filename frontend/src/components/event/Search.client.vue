@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import type { MangoQuerySelector } from "rxdb";
-import type { EventType, EventDocument, EventCollection } from "~/rxdb/types";
+import type { EventType, EventCollection } from "~/rxdb/types";
 
 const props = defineProps<{
   pastEvents?: boolean;
@@ -48,5 +48,5 @@ const query = computed(() => {
     });
 });
 
-const events = await useRxQuery<EventType, EventDocument[]>("events", query);
+const events = await useRxQuery("events", query);
 </script>

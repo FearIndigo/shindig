@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UserDocument, UserType } from "~/rxdb/types";
+import type { UserCollection } from "~/rxdb/types";
 
 const users = defineModel<string[]>();
 const props = defineProps<{
@@ -21,13 +21,14 @@ const props = defineProps<{
   icon?: string;
 }>();
 
-const allUsers = await useRxQuery<UserType, UserDocument[]>(
-  "users",
-  (collection) =>
+const query = computed(
+  () => (collection: UserCollection) =>
     collection.find({
       selector: {
         id: { $nin: props.excludeUsers },
       },
     })
 );
+
+const allUsers = await useRxQuery("users", query);
 </script>

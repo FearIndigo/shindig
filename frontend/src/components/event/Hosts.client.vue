@@ -8,11 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import type { EventDocument, UserDocument, UserType } from "~/rxdb/types";
+import type { EventDocument, UserCollection } from "~/rxdb/types";
 const { event } = defineProps<{ event: EventDocument }>();
 
 const query = computed(
-  () => (collection) =>
+  () => (collection: UserCollection) =>
     collection.find({
       selector: {
         id: { $in: event.hosts },
@@ -20,7 +20,7 @@ const query = computed(
     })
 );
 
-const hosts = await useRxQuery<UserType, UserDocument[]>("users", query);
+const hosts = await useRxQuery("users", query);
 
 const hostsText = computed(() => {
   if (!hosts.value) return "";

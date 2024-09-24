@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UserType, UserDocument, UserCollection } from "~/rxdb/types";
+import type { UserCollection } from "~/rxdb/types";
 
 const { id } = defineProps<{ id: string }>();
 
@@ -16,5 +16,5 @@ const query = computed(
     })
 );
 
-const user = await useRxQuery<UserType, UserDocument | null>("users", query);
+const user = await useRxQuery("users", query);
 </script>

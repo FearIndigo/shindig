@@ -41,12 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  EventDocument,
-  UserCollection,
-  UserDocument,
-  UserType,
-} from "~/rxdb/types";
+import type { EventDocument, UserCollection } from "~/rxdb/types";
 const { event } = defineProps<{ event: EventDocument }>();
 
 const tab = ref(null);
@@ -75,7 +70,7 @@ const query = computed(
     })
 );
 
-const allGuests = await useRxQuery<UserType, UserDocument[]>("users", query);
+const allGuests = await useRxQuery("users", query);
 
 function getUsers(ids: string[]) {
   return allGuests.value?.filter((user) => ids.includes(user.id)) ?? [];

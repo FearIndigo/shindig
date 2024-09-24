@@ -13,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import type { CommentType, CommentDocument, EventDocument } from "~/rxdb/types";
+import type { EventDocument, CommentCollection } from "~/rxdb/types";
 
 const { event } = defineProps<{ event: EventDocument }>();
 
 const query = computed(() => {
-  return (collection) =>
+  return (collection: CommentCollection) =>
     collection.find({
       selector: {
         id: { $in: event.comments },
@@ -27,10 +27,7 @@ const query = computed(() => {
     });
 });
 
-const comments = await useRxQuery<CommentType, CommentDocument[]>(
-  "comments",
-  query
-);
+const comments = await useRxQuery("comments", query);
 
 const session = await useSessionData();
 const loggedIn = session.passport?.user != null;
