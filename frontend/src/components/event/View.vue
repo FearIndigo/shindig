@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import type { EventDocument, UserDocument, UserType } from "~/rxdb/types";
+import type { EventDocument } from "~/rxdb/types";
 
 const { event } = defineProps<{
   event: EventDocument;
