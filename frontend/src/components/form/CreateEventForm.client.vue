@@ -7,14 +7,23 @@
 
     <v-divider></v-divider>
 
-    <v-form @submit.prevent="submit" class="d-flex flex-column ga-6">
+    <v-form
+      @submit.prevent="submit"
+      v-model="valid"
+      class="d-flex flex-column ga-6"
+    >
       <div>
-        <v-text-field v-model="event.title" label="Title" />
+        <v-text-field
+          v-model="event.title"
+          label="Title"
+          :rules="[formRules.required]"
+        />
 
         <v-text-field
           v-model="event.location"
           label="Location"
           prepend-inner-icon="mdi-map-marker-outline"
+          :rules="[formRules.required]"
         />
 
         <InputDateTime v-model="event.startAt" label="Start" />
@@ -58,6 +67,8 @@
 <script setup lang="ts">
 import type { EventType } from "~/rxdb/types";
 
+const valid = ref();
+
 const visibilityItems = ["Private", "Public", "Friends"];
 
 const event = ref<EventType>({
@@ -93,6 +104,8 @@ if (!session.passport?.user) {
 const user = session.passport.user;
 
 async function submit() {
+  if (!valid.value) return;
+
   const db = await useRxDB();
 
   if (!useEndAt) {
