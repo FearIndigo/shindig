@@ -5,21 +5,25 @@
         :to="`/user/${user.id}`"
         style="text-decoration: none; color: inherit"
       >
-        <span class="text-subtitle-1 text-disabled"> By {{ user.name }} </span>
+        <span class="text-subtitle-1 text-medium-emphasis">
+          {{ user.name }}
+        </span>
       </NuxtLink>
+
+      <span class="text-caption text-disabled">{{ timestampText }}</span>
     </div>
 
     <pre class="text-body-1 py-2">{{ comment.message }}</pre>
-
-    <span class="text-caption text-disabled">{{ createdText }}</span>
   </v-list-item>
 </template>
 
 <script setup lang="ts">
-import { format } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 import type { CommentDocument, UserType } from "~/rxdb/types";
 
 const props = defineProps<{ comment: CommentDocument }>();
-const createdText = format(new Date(props.comment.createdAt), "Pp");
+const timestampText = formatDistanceToNowStrict(
+  new Date(props.comment.createdAt)
+);
 const user: UserType | null = await props.comment.populate("authorId");
 </script>
