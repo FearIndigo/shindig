@@ -1,16 +1,11 @@
 <template>
   <v-list-item class="px-6">
     <div v-if="user" class="d-flex ga-2 align-center">
-      <v-avatar color="secondary" size="small">{{
-        user.name[0].toUpperCase()
-      }}</v-avatar>
       <NuxtLink
         :to="`/user/${user.id}`"
         style="text-decoration: none; color: inherit"
       >
-        <span class="text-subtitle-1">
-          {{ user.name }}
-        </span>
+        <span class="text-subtitle-1 text-disabled"> By {{ user.name }} </span>
       </NuxtLink>
     </div>
 
