@@ -2,6 +2,6 @@
   <ContainerPage>
     <InputBreadcrumbs />
 
-    <EventPage :id="$route.params.id" />
+    <EventItem :id="$route.params.id" />
   </ContainerPage>
 </template>

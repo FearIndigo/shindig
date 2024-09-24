@@ -1,7 +1,8 @@
 <template>
   <ContainerPage>
-    <InputBreadcrumbs />
+    <p class="text-overline">Events feed</p>
+    <EventSearch include-public />
 
-    <p>Hello home page</p>
+    <InputCreateEventFAB />
   </ContainerPage>
 </template>

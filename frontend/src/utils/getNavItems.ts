@@ -14,9 +14,15 @@ export default function getNavItems() {
       colour: "primary",
     },
     {
-      label: "Events",
+      label: "Your events",
       icon: "mdi-calendar-outline",
       path: "/event",
+      colour: "secondary",
+    },
+    {
+      label: "Your past events",
+      icon: "mdi-calendar-refresh-outline",
+      path: "/event/past",
       colour: "secondary",
     },
   ];

@@ -63,7 +63,8 @@ const event = ref<EventType>({
   id: uuidv4(),
   hosts: [],
   title: "",
-  startAt: Date.now(),
+  // Get timestamp at the start of the next 30min period, with a 15min buffer.
+  startAt: Math.ceil((Date.now() + 900_000) / 1_800_000) * 1_800_000,
   duration: 0,
   location: "",
   description: "",

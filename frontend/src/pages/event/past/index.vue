@@ -2,8 +2,8 @@
   <ContainerPage>
     <InputBreadcrumbs />
 
-    <p class="text-overline">Your Events</p>
-    <EventSearch />
+    <p class="text-overline">Your Past Events</p>
+    <EventSearch past-events />
 
     <InputCreateEventFAB />
   </ContainerPage>
