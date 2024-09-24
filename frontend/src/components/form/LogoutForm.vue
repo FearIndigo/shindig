@@ -10,7 +10,7 @@
     <v-divider></v-divider>
 
     <v-form :action="`${$config.public.apiBase}/auth/logout`" method="post">
-      <v-btn type="submit" variant="tonal" block>Log out</v-btn>
+      <v-btn type="submit" color="error" block>Log out</v-btn>
     </v-form>
   </v-sheet>
 </template>

@@ -10,7 +10,7 @@
     <v-divider></v-divider>
 
     <v-form :action="`${$config.public.apiBase}/auth/login`">
-      <v-btn type="submit" variant="tonal" block>Log in with Keycloak</v-btn>
+      <v-btn type="submit" color="primary" block>Log in with Keycloak</v-btn>
     </v-form>
   </v-sheet>
 </template>
