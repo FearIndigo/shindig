@@ -8,8 +8,10 @@
 
         <p>{{ event.location }}</p>
 
-        <div class="d-flex justify-space-between mt-4">
-          <div></div>
+        <div v-if="user" class="d-flex justify-space-between align-center mt-4">
+          <div>
+            <EventResponse :event="event" :user-id="user.id" />
+          </div>
 
           <div>
             <EventOptions v-if="isHost" :event="event" />
@@ -48,7 +50,6 @@ const props = defineProps<{
 const timeText = computed(() => getEventTimeText(props.event));
 
 const session = await useSessionData();
-const isHost =
-  session.passport?.user.id &&
-  props.event.hosts.includes(session.passport?.user.id);
+const user = session.passport?.user;
+const isHost = user && props.event.hosts.includes(session.passport!.user.id);
 </script>

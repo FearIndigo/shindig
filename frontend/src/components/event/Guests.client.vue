@@ -16,7 +16,10 @@
             v-for="[type, ids] in Object.entries(filteredIds)"
             :key="type"
           >
-            <v-tab :text="`${type} (${ids.length})`"></v-tab>
+            <v-tab
+              :text="`${type} (${ids.length})`"
+              :prepend-icon="getResponseIcon(type)"
+            ></v-tab>
           </template>
         </v-tabs>
 
@@ -52,7 +55,7 @@ const filteredIds = computed(() =>
       else acc[response.type] = [response.userId];
       return acc;
     },
-    { Going: props.event.hosts }
+    { Going: [...props.event.hosts] }
   )
 );
 
