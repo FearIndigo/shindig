@@ -18,12 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatDistanceToNowStrict } from "date-fns";
 import type { CommentDocument, UserType } from "~/rxdb/types";
 
 const props = defineProps<{ comment: CommentDocument }>();
-const timestampText = formatDistanceToNowStrict(
-  new Date(props.comment.createdAt)
-);
+const timestampText = useReactiveFormatDistanceToNow(props.comment.createdAt);
 const user: UserType | null = await props.comment.populate("authorId");
 </script>
