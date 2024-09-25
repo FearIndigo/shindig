@@ -10,7 +10,7 @@
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card title="Guests">
+      <v-card title="Guests" prepend-icon="mdi-account-multiple-outline">
         <v-tabs v-model="tab" fixed-tabs>
           <template
             v-for="[type, ids] in Object.entries(filteredIds)"
@@ -19,8 +19,6 @@
             <v-tab :text="`${type} (${ids.length})`"></v-tab>
           </template>
         </v-tabs>
-
-        <v-divider></v-divider>
 
         <v-tabs-window v-model="tab">
           <v-tabs-window-item
@@ -31,8 +29,6 @@
             <UserList :users="getUsers(ids)" />
           </v-tabs-window-item>
         </v-tabs-window>
-
-        <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
