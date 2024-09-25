@@ -37,6 +37,8 @@
         <div class="px-6 my-6">
           <pre class="text-body-1">{{ event.description }}</pre>
         </div>
+
+        <EventInteractions :event="event" class="my-6" />
       </div>
     </v-sheet>
 
