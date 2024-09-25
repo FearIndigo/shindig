@@ -28,6 +28,10 @@
 
         <EventHosts :event="event" />
 
+        <EventLocation :location="event.location" />
+
+        <EventDuration v-if="event.duration > 0" :event="event" />
+
         <EventVisibility :visibility="event.visibility" />
 
         <div class="px-6 my-6">
