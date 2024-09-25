@@ -7,6 +7,14 @@
         <h2>{{ event.title }}</h2>
 
         <p>{{ event.location }}</p>
+
+        <div class="d-flex justify-space-between mt-4">
+          <div></div>
+
+          <div>
+            <EventOptions v-if="isHost" :event="event" />
+          </div>
+        </div>
       </div>
 
       <v-divider></v-divider>
@@ -37,5 +45,10 @@ const props = defineProps<{
   event: EventDocument;
 }>();
 
-const timeText = getEventTimeText(props.event);
+const timeText = computed(() => getEventTimeText(props.event));
+
+const session = await useSessionData();
+const isHost =
+  session.passport?.user.id &&
+  props.event.hosts.includes(session.passport?.user.id);
 </script>

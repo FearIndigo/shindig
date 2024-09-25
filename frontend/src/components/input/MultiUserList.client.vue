@@ -27,7 +27,7 @@ const query = computed(() => {
   return (collection: UserCollection) =>
     collection.find({
       selector: {
-        id: { $nin: props.excludeUsers },
+        id: { $nin: props.excludeUsers ?? [] },
       },
     });
 });

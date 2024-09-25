@@ -1,6 +1,6 @@
 <template>
   <v-btn @click="toggleTheme" icon>
-    <v-icon>{{ icon }}</v-icon>
+    <v-icon :icon="icon"></v-icon>
     <v-tooltip activator="parent" location="bottom">Toggle theme</v-tooltip>
   </v-btn>
 </template>

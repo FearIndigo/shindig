@@ -1,8 +1,8 @@
 <template>
   <v-sheet class="pa-6 d-flex flex-column ga-6" elevation="4" rounded>
     <div class="d-flex align-center ga-2">
-      <v-icon icon="mdi-calendar-plus"></v-icon>
-      <h4 class="text-h5">Create Event</h4>
+      <v-icon :icon="titleIcon"></v-icon>
+      <h4 class="text-h5">{{ actionText }}</h4>
     </div>
 
     <v-divider></v-divider>
@@ -44,7 +44,7 @@
 
         <v-select
           v-model="event.visibility"
-          :items="visibilityItems"
+          :items="['Private', 'Public', 'Friends']"
           label="Visibility"
           prepend-inner-icon="mdi-eye-outline"
         ></v-select>
@@ -59,7 +59,7 @@
 
       <v-divider></v-divider>
 
-      <v-btn type="submit" color="primary">Create Event</v-btn>
+      <v-btn type="submit" color="primary">{{ actionText }}</v-btn>
     </v-form>
   </v-sheet>
 </template>
@@ -67,26 +67,34 @@
 <script setup lang="ts">
 import type { EventType } from "~/rxdb/types";
 
+const props = defineProps<{ editEvent?: EventType }>();
+const emit = defineEmits<{
+  submit: [];
+}>();
+
 const valid = ref();
 
-const visibilityItems = ["Private", "Public", "Friends"];
+const actionText = props.editEvent ? "Edit Event" : "Create Event";
+const titleIcon = props.editEvent ? "mdi-pencil-outline" : "mdi-calendar-plus";
 
-const event = ref<EventType>({
-  id: uuidv4(),
-  hosts: [],
-  title: "",
-  // Get timestamp at the start of the next 30min period, with a 15min buffer.
-  startAt: Math.ceil((Date.now() + 900_000) / 1_800_000) * 1_800_000,
-  duration: 0,
-  location: "",
-  description: "",
-  responses: [],
-  interactions: [],
-  comments: [],
-  visibility: "Private",
-});
+const event = props.editEvent
+  ? useCloned(props.editEvent).cloned
+  : ref<EventType>({
+      id: uuidv4(),
+      hosts: [],
+      title: "",
+      // Get timestamp at the start of the next 30min period, with a 15min buffer.
+      startAt: Math.ceil((Date.now() + 900_000) / 1_800_000) * 1_800_000,
+      duration: 0,
+      location: "",
+      description: "",
+      responses: [],
+      interactions: [],
+      comments: [],
+      visibility: "Private",
+    });
 
-const useEndAt = ref(false);
+const useEndAt = ref(props.editEvent && props.editEvent.duration > 0);
 
 const endAt = computed({
   get: () => event.value.startAt + event.value.duration,
@@ -94,14 +102,20 @@ const endAt = computed({
 });
 
 const session = await useSessionData();
-
 if (!session.passport?.user) {
   throw createError({
     statusCode: 401,
-    statusMessage: "Unauthorized: You need to log in to create events!",
+    statusMessage: "Unauthorized: You need to log in to manage events!",
   });
 }
 const user = session.passport.user;
+if (props.editEvent && !props.editEvent.hosts.includes(user.id)) {
+  throw createError({
+    statusCode: 401,
+    statusMessage:
+      "Unauthorized: You can only edit events that you are hosting!",
+  });
+}
 
 async function submit() {
   if (!valid.value) return;
@@ -112,9 +126,14 @@ async function submit() {
     event.value.duration = 0;
   }
 
-  event.value.hosts.push(user.id);
+  // Make sure the person editing/creating is a host.
+  if (!event.value.hosts.includes(user.id)) {
+    event.value.hosts.push(user.id);
+  }
 
-  const newEvent = await db.events.insert(toRaw(event.value));
+  const newEvent = await db.events.upsert(toRaw(event.value));
+
+  emit("submit");
 
   navigateTo(`/event/${newEvent.id}`);
 }

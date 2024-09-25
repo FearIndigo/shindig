@@ -17,5 +17,5 @@ const props = defineProps<{
   event: EventType;
 }>();
 
-const timeText = getEventTimeText(props.event);
+const timeText = computed(() => getEventTimeText(props.event));
 </script>
