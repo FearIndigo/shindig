@@ -1,5 +1,9 @@
 <template>
-  <v-breadcrumbs :items="items" class="pa-0"></v-breadcrumbs>
+  <v-breadcrumbs
+    :items="items"
+    class="pa-0 text-overline"
+    style="margin: 0 -4px; line-height: 2.667"
+  ></v-breadcrumbs>
 </template>
 
 <script setup lang="ts">
