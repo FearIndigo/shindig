@@ -1,27 +1,25 @@
 <template>
-  <v-list-item class="px-6">
-    <div class="d-flex ga-2 align-center">
-      <InteractionInput
-        @on-selection="onSelection"
-        :current-selection="currentSelection?.type"
-        :disabled="!loggedIn"
-      />
-      <InteractionView v-if="interactions" :interactions="interactions" />
-    </div>
-  </v-list-item>
+  <div class="d-flex ga-2 align-center">
+    <InteractionInput
+      @on-selection="onSelection"
+      :current-selection="currentSelection?.type"
+      :disabled="!loggedIn"
+    />
+    <InteractionView v-if="interactions" :interactions="interactions" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { EventDocument, InteractionCollection } from "~/rxdb/types";
+import type { CommentDocument, InteractionCollection } from "~/rxdb/types";
 
-const props = defineProps<{ event: EventDocument }>();
+const props = defineProps<{ comment: CommentDocument }>();
 
 const query = computed(() => {
-  const deps = [props.event.interactions];
+  const deps = [props.comment.interactions];
   return (collection: InteractionCollection) =>
     collection.find({
       selector: {
-        id: { $in: props.event.interactions },
+        id: { $in: props.comment.interactions },
       },
     });
 });
@@ -44,10 +42,10 @@ async function onSelection(
       // Remove interaction.
       const removed = await currentSelection.value.remove();
 
-      // Remove reference from event.
-      await props.event.patch({
+      // Remove reference from comment.
+      await props.comment.patch({
         interactions: [
-          ...props.event.interactions.filter((id) => id != removed.id),
+          ...props.comment.interactions.filter((id) => id != removed.id),
         ],
       });
     } else {
@@ -66,9 +64,9 @@ async function onSelection(
       type,
     });
 
-    // Add interaction to event.
-    await props.event.patch({
-      interactions: [...props.event.interactions, newInteraction.id],
+    // Add interaction to comment.
+    await props.comment.patch({
+      interactions: [...props.comment.interactions, newInteraction.id],
     });
   }
 }

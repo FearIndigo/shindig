@@ -14,6 +14,8 @@
     </div>
 
     <p>{{ comment.message }}</p>
+
+    <CommentInteractions :comment="comment" class="mt-4" />
   </v-list-item>
 </template>
 

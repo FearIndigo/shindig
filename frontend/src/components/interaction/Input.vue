@@ -28,15 +28,19 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ disabled: boolean; currentSelection: string }>();
-const emit = defineEmits<{ selection: [string] }>();
+defineProps<{ disabled?: boolean; currentSelection?: string }>();
+const emit = defineEmits<{
+  onSelection: ["Like" | "Love" | "Care" | "Haha" | "Wow" | "Sad" | "Angry"];
+}>();
 
 const types = ["Like", "Love", "Care", "Haha", "Wow", "Sad", "Angry"];
 
 const menuOpen = ref(false);
 
-function onSelected(type: string) {
+function onSelected(
+  type: "Like" | "Love" | "Care" | "Haha" | "Wow" | "Sad" | "Angry"
+) {
   menuOpen.value = false;
-  emit("selection", type);
+  emit("onSelection", type);
 }
 </script>
