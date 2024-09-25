@@ -1,5 +1,5 @@
 <template>
-  <v-menu v-model="modalOpen">
+  <v-menu v-model="menuOpen">
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props" variant="flat" icon>
         <v-icon icon="mdi-dots-vertical"></v-icon>
@@ -7,8 +7,9 @@
       </v-btn>
     </template>
     <v-list>
-      <EventEditDialog :event="event" @on-close="modalOpen = false" />
-      <EventDeleteDialog :event="event" />
+      <EventEditDialog :event="event" @on-close="closeMenu" />
+      <EventDeleteDialog :event="event" @on-close="closeMenu" />
+      <EventInviteDialog :event="event" @on-close="closeMenu" />
     </v-list>
   </v-menu>
 </template>
@@ -18,9 +19,9 @@ import type { EventDocument } from "~/rxdb/types";
 
 defineProps<{ event: EventDocument }>();
 
-const modalOpen = ref(false);
+const menuOpen = ref(false);
 
-function closeModal() {
-  modalOpen.value = false;
+function closeMenu() {
+  menuOpen.value = false;
 }
 </script>

@@ -16,11 +16,12 @@
 
 <script setup lang="ts">
 import type { EventDocument } from "~/rxdb/types";
+import { VForm } from "vuetify/components";
 
 const props = defineProps<{ event: EventDocument }>();
 
 const valid = ref();
-const form = ref(null);
+const form = ref<InstanceType<typeof VForm>>();
 
 const session = await useSessionData();
 const userId = session.passport?.user.id ?? "";
@@ -46,6 +47,6 @@ async function submit() {
   });
 
   // Reset form.
-  form.value.reset();
+  form.value?.reset();
 }
 </script>

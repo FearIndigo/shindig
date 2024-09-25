@@ -15,7 +15,7 @@
         <template v-slot:actions>
           <v-spacer></v-spacer>
 
-          <v-btn @click="closeModal(isActive)">Cancel</v-btn>
+          <v-btn @click="closeModal">Cancel</v-btn>
           <v-btn color="error" @click="deleteEvent"> Delete </v-btn>
         </template>
       </v-card>
@@ -27,9 +27,13 @@
 import type { EventDocument } from "~/rxdb/types";
 
 const props = defineProps<{ event: EventDocument }>();
+const emit = defineEmits<{ onClose: [] }>();
 
-function closeModal(isActive: Ref<boolean>) {
-  isActive.value = false;
+const modalOpen = ref(false);
+
+function closeModal() {
+  modalOpen.value = false;
+  emit("onClose");
 }
 
 async function deleteEvent() {
