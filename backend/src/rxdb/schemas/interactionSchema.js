@@ -17,7 +17,7 @@ export default {
     },
     type: {
       type: "string",
-      enum: ["Like", "Heart", "Laugh", "Sad", "Cry"],
+      enum: ["Like", "Love", "Care", "Haha", "Wow", "Sad", "Angry"],
     },
     updatedAt: {
       type: "integer",
