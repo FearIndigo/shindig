@@ -41,6 +41,9 @@ passport.use(
           } else {
             // The account at the OpenID Provider (OP) has previously logged in to
             // the app. Ensure it is linked with the OP then log the user in.
+            if (user.providers.includes(issuer)) {
+              return cb(null, user.toJSON());
+            }
             user
               .patch({
                 providers: [...user.providers, issuer],
