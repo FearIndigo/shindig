@@ -17,6 +17,12 @@ export default {
       type: "string",
       format: "email",
     },
+    providers: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+    },
     updatedAt: {
       type: "integer",
       minimum: 0,
@@ -25,6 +31,6 @@ export default {
     },
   },
   additionalProperties: false,
-  required: ["id", "name", "email"],
+  required: ["id", "name", "email", "providers"],
   indexes: ["updatedAt"],
 };

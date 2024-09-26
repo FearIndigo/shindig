@@ -1,7 +1,6 @@
 import passport from "passport";
 import OpenIDConnectStrategy from "passport-openidconnect";
 import server from "../index.js";
-import { v4 as uuidv4 } from "uuid";
 
 passport.use(
   new OpenIDConnectStrategy(
@@ -17,16 +16,15 @@ passport.use(
     function verify(issuer, profile, cb) {
       const db = server.database;
 
-      db.providers
+      db.users
         .findOne({
           selector: {
-            provider: issuer,
-            userId: profile.id,
+            id: profile.id,
           },
         })
         .exec()
-        .then((provider) => {
-          if (!provider) {
+        .then((user) => {
+          if (!user) {
             // The account at the OpenID Provider (OP) has not logged in to this app
             // before. Create a new user account and associate it with the account
             // at the OP.
@@ -35,33 +33,19 @@ passport.use(
                 id: profile.id,
                 name: profile.username,
                 email: profile.emails[0].value,
+                providers: [issuer],
               })
               .then((user) => {
-                db.providers
-                  .insert({
-                    id: uuidv4(),
-                    provider: issuer,
-                    userId: user.id,
-                  })
-                  .then((provider) => {
-                    return cb(null, user.toJSON());
-                  });
+                return cb(null, user.toJSON());
               });
           } else {
             // The account at the OpenID Provider (OP) has previously logged in to
-            // the app. Get the user account associated with the account at the OP
-            // and log the user in.
-            db.users
-              .findOne({
-                selector: {
-                  id: profile.id,
-                },
+            // the app. Ensure it is linked with the OP then log the user in.
+            user
+              .patch({
+                providers: [...user.providers, issuer],
               })
-              .exec()
               .then((user) => {
-                if (!user) {
-                  return cb(null, false);
-                }
                 return cb(null, user.toJSON());
               });
           }

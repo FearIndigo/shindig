@@ -8,7 +8,7 @@ interface ISessionData {
     path: string;
   };
   passport?: {
-    user: UserType & { email: string };
+    user: UserType & { email: string; providers: string[] };
   };
 }
 
