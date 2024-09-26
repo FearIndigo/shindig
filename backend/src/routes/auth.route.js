@@ -44,6 +44,7 @@ passport.use(
             if (user.providers.includes(issuer)) {
               return cb(null, user.toJSON());
             }
+            // Update user providers
             user
               .patch({
                 providers: [...user.providers, issuer],
