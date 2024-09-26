@@ -4,9 +4,9 @@ An event management app.
 
 Technology used:
 
-- **Backend:** [Express.js](https://expressjs.com/) [(RxDB Server)](https://rxdb.info/rx-server.html), [MongoDB](https://www.mongodb.com/), [Auth.js](https://authjs.dev/), [Keycloak](https://www.keycloak.org/)
-- **Frontend:** [Nuxt.js](https://nuxt.com/) [(Vue.js)](https://vuejs.org/), [RxDB](https://rxdb.info/) [(with replication)](https://rxdb.info/replication.html), [Typescript](https://www.typescriptlang.org/)
-- **Deployment:** [AWS CDK](https://aws.amazon.com/cdk/), [ACM](https://aws.amazon.com/certificate-manager/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/)
+- **Backend:** [Express.js](https://expressjs.com/) [(RxDB Server)](https://rxdb.info/rx-server.html), [MongoDB](https://www.mongodb.com/), [Passport.js](https://www.passportjs.org/), [Keycloak](https://www.keycloak.org/)
+- **Frontend:** [Nuxt.js](https://nuxt.com/) [(Vue.js)](https://vuejs.org/), [RxDB](https://rxdb.info/) [(with replication)](https://rxdb.info/replication.html), [Typescript](https://www.typescriptlang.org/), [Vuetify](https://vuetifyjs.com/en/)
+- **Deployment:** [AWS CDK](https://aws.amazon.com/cdk/), [ACM](https://aws.amazon.com/certificate-manager/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/), [Docker](https://www.docker.com/)
 
 ## Backend
 
@@ -97,6 +97,9 @@ npm run dev
 
 # Generate files to be deployed.
 npm run generate
+
+# (optional) preview generated files locally.
+npm run preview
 ```
 
 ## Deploy / AWS CDK
